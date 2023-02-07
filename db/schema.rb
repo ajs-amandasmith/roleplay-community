@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_202647) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_07_005326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,17 +42,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_202647) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "character_groups", id: false, force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "group_id", null: false
+  end
+
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_characters_on_user_id"
-  end
-
-  create_table "characters_groups", id: false, force: :cascade do |t|
-    t.bigint "character_id", null: false
-    t.bigint "group_id", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -72,11 +72,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_202647) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "groups_users", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "group_id", null: false
-  end
-
   create_table "posts", force: :cascade do |t|
     t.text "post"
     t.datetime "created_at", null: false
@@ -85,6 +80,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_202647) do
     t.bigint "group_id", null: false
     t.index ["character_id"], name: "index_posts_on_character_id"
     t.index ["group_id"], name: "index_posts_on_group_id"
+  end
+
+  create_table "user_groups", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
   end
 
   create_table "users", force: :cascade do |t|
