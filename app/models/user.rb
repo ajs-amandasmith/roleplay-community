@@ -4,7 +4,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   has_many :characters
-  has_many :groups
+  has_many :posts
+  has_many :comments
   
   validates :username, presence: true, uniqueness: true
 

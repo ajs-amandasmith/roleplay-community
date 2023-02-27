@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_07_005326) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_27_205752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,11 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_005326) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "character_groups", id: false, force: :cascade do |t|
-    t.bigint "character_id", null: false
-    t.bigint "group_id", null: false
-  end
-
   create_table "characters", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -65,9 +60,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_005326) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
-  create_table "groups", force: :cascade do |t|
-    t.string "title"
-    t.text "about"
+  create_table "post_tags", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,14 +72,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_005326) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "character_id", null: false
-    t.bigint "group_id", null: false
     t.index ["character_id"], name: "index_posts_on_character_id"
-    t.index ["group_id"], name: "index_posts_on_group_id"
   end
 
-  create_table "user_groups", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "group_id", null: false
+  create_table "tags", force: :cascade do |t|
+    t.string "tag"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -101,5 +95,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_07_005326) do
   add_foreign_key "comments", "characters"
   add_foreign_key "comments", "posts"
   add_foreign_key "posts", "characters"
-  add_foreign_key "posts", "groups"
 end
