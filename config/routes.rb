@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   resources :users
+  resources :characters
+  resources :comments
+  resources :tags
+  resources :posts
 
   get '*path',
       to: 'fallback#index',
