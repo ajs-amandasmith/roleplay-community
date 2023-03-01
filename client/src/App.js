@@ -15,14 +15,18 @@ function App() {
   return (
     <BrowserRouter>
        <div className="App">
-        <Switch>
+        <h1 className="text-3xl font-bold underline">
+          Hello world!
+        </h1>
+
+        {/* <Switch>
           <Route path="/testing">
             <h1>Test Route</h1>
           </Route>
           <Route path="/">
             <h1></h1>
           </Route>
-        </Switch>
+        </Switch> */}
       </div>
     </BrowserRouter>
    
