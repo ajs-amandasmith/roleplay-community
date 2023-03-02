@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
+import ProfilePage from "./ProfilePage";
+import CharacterPage from "./CharacterPage";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -17,14 +19,14 @@ function App() {
     <BrowserRouter>
        <div className="App">
         <NavBar />
-        {/* <Switch>
-          <Route path="/testing">
-            <h1>Test Route</h1>
+        <Switch>
+          <Route path="/profile">
+            <ProfilePage />
           </Route>
-          <Route path="/">
-            <h1></h1>
+          <Route path="/characters">
+            <CharacterPage />
           </Route>
-        </Switch> */}
+        </Switch>
       </div>
     </BrowserRouter>
    
