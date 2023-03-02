@@ -5,6 +5,7 @@ import ProfilePage from "./ProfilePage";
 import CharacterPage from "./CharacterPage";
 import HomePage from "./HomePage";
 import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/login">
             <LoginForm />
+          </Route>
+          <Route path="/signup">
+            <SignupForm />
           </Route>
         </Switch>
       </div>
