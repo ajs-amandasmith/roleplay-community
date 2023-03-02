@@ -4,6 +4,8 @@ import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
 import CharacterPage from "./CharacterPage";
 import HomePage from "./HomePage";
+import LoginForm from "./LoginForm";
+import LogoutForm from "./LogoutForm";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -29,6 +31,12 @@ function App() {
           </Route>
           <Route path="/characters">
             <CharacterPage />
+          </Route>
+          <Route path="/login">
+            <LoginForm />
+          </Route>
+          <Route path="/logout">
+            <LogoutForm />
           </Route>
         </Switch>
       </div>
