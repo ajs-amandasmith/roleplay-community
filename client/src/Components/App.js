@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
 import CharacterPage from "./CharacterPage";
+import HomePage from "./HomePage";
 
 function App() {
   const [user, setUser] = useState([]);
@@ -20,6 +21,9 @@ function App() {
        <div className="App">
         <NavBar />
         <Switch>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
           <Route path="/profile">
             <ProfilePage />
           </Route>
