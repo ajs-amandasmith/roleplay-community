@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../Context/user";
 
 function LoginForm() {
   // sets the form's state
@@ -6,6 +7,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { user, setUser } = useContext(UserContext);
 
   // submit form function
   function handleSubmit(e) {
@@ -22,12 +24,14 @@ function LoginForm() {
       .then(r => {
         setIsLoading(false);
         if (r.ok) {
-          r.json().then(user => console.log('user', user))
+          r.json().then(user => setUser(user))
         } else {
           r.json().then(err => setErrors(err.errors))
         }
       })
   }
+
+  console.log('login user', user);
 
   // displayed form
   return (

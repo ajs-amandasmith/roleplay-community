@@ -8,7 +8,9 @@ function ProfilePage() {
 
   return (
     <div>
-      Profile Page
+      <h1 className="mt-1 text-5xl font-medium leading-tight">Welcome, {user.username}!</h1>
+      <h2 className="mt-1 text-4xl">You can update your profile settings here!</h2>
+      
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { UserProvider } from "../Context/user";
 import NavBar from "./NavBar";
@@ -9,15 +9,6 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
 function App() {
-  const [user, setUser] = useState([]);
-
-  useEffect(() => {
-    fetch("/me")
-      .then((r) => r.json())
-      .then((data) => setUser(data));
-  }, [])
-
-  console.log(user)
   
   return (
     <BrowserRouter>
@@ -36,7 +27,9 @@ function App() {
             <CharacterPage />
           </Route>
           <Route path="/login">
-            <LoginForm />
+            <UserProvider>
+              <LoginForm />
+            </UserProvider>
           </Route>
           <Route path="/signup">
             <SignupForm />
