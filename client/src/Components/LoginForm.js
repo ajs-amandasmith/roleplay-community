@@ -1,14 +1,16 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../Context/user";
+import { Redirect } from "react-router-dom";
 
 function LoginForm() {
+  const { user, setUser } = useContext(UserContext);
+  const [toHome, setToHome] = useState(false);
   // sets the form's state
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const { user, setUser } = useContext(UserContext);
-
+  
   // submit form function
   function handleSubmit(e) {
     e.preventDefault();
@@ -24,14 +26,20 @@ function LoginForm() {
       .then(r => {
         setIsLoading(false);
         if (r.ok) {
-          r.json().then(user => setUser(user))
+          r.json().then(user => {
+            setUser(user);
+            setToHome(true);
+          })
         } else {
           r.json().then(err => setErrors(err.errors))
         }
       })
   }
 
-  console.log('login user', user);
+  // takes the user to the Home Page after logging in
+  if (toHome) {
+    return <Redirect to="/" />
+  }
 
   // displayed form
   return (

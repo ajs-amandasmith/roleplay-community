@@ -14,32 +14,30 @@ function App() {
   console.log('user app', user)
   
   return (
-    <BrowserRouter>
-       <div className="App">
-        <NavBar />
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/profile">
-            <UserProvider>
-              <ProfilePage />
-            </UserProvider>
-          </Route>
-          <Route path="/characters">
-            <CharacterPage />
-          </Route>
-          <Route path="/login">
-            <UserProvider>
-              <LoginForm />
-            </UserProvider>
-          </Route>
-          <Route path="/signup">
-            <SignupForm />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <div className="App">
+          <NavBar />
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route path="/profile">
+                <ProfilePage />
+            </Route>
+            <Route path="/characters">
+              <CharacterPage />
+            </Route>
+            <Route path="/login">
+                <LoginForm />
+            </Route>
+            <Route path="/signup">
+              <SignupForm />
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </UserProvider>
    
   );
 }
