@@ -6,7 +6,9 @@ function ProfilePage() {
   const { user } = useContext(UserContext);
   const [addAvatar, setAddAvatar] = useState(false);
 
-  console.log('user', user.comments)
+  console.log('comments', user.comments)
+  console.log('posts', user.posts)
+  console.log('characters', user.characters)
 
   function handleAddAvatar() {
     setAddAvatar(!addAvatar)

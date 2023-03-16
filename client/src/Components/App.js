@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { UserProvider } from "../Context/user";
 import NavBar from "./NavBar";
@@ -9,6 +9,16 @@ import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 
 function App() {
+  const [allPosts, setAllPosts] = useState([]);
+
+  useEffect(() => {
+    fetch('/posts')
+      .then(r => {
+        if (r.ok) {
+          r.json().then(posts => setAllPosts(posts))
+        }
+      })
+  }, [])
   
   return (
     <UserProvider>
@@ -17,7 +27,7 @@ function App() {
           <NavBar />
           <Switch>
             <Route exact path="/">
-              <HomePage />
+              <HomePage allPosts={allPosts} />
             </Route>
             <Route path="/profile">
                 <ProfilePage />

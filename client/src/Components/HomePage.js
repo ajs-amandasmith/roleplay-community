@@ -1,10 +1,19 @@
 import React from "react";
 
-function HomePage() {
+function HomePage({ allPosts }) {
+
+  const displayPosts = allPosts.map(post => (
+    <div>
+      <h4 className="text-2xl">{post.post}</h4>
+      <p>Comments: {post.comments.length}</p>
+    </div>
+  ))
 
   return (
     <div>
-      Home Page
+      <h2 className="text-3xl">Available Posts</h2>
+      <br></br>
+      {displayPosts}
     </div>
   )
 }
