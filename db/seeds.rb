@@ -16,4 +16,6 @@ User.create(username: "Bob", about_me: "Hello, my name's Bob and I like to write
 User.create(username: "Writes4U", about_me: "Creating things really is the best thing in the world!", password_digest: "Writes4U")
 User.create(username: "I'M LOUD", about_me: "WRITING MAKES ME HAPPY", password_digest: "ALLCAPS")
 
+Post.create(post: "I am a Post!", user_id: 1)
+
 puts "✅ Done seeding!"
