@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function HomePage({ allPosts }) {
 
   const displayPosts = allPosts.map(post => (
     <div>
-      <h4 className="text-2xl">{post.title}</h4>
+      <Link><h4 className="text-2xl">{post.title}</h4></Link>
       <p>By: {post.character.name}</p>
       <p>Comments: {post.comments.length}</p>
       <br></br>
