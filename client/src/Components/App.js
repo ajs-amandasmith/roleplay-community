@@ -7,6 +7,7 @@ import CharacterPage from "./CharacterPage";
 import HomePage from "./HomePage";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import Post from "./Post";
 
 function App() {
   const [allPosts, setAllPosts] = useState([]);
@@ -28,6 +29,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <HomePage allPosts={allPosts} />
+            </Route>
+            <Route path="/posts/:id">
+              <Post />
             </Route>
             <Route path="/profile">
                 <ProfilePage />

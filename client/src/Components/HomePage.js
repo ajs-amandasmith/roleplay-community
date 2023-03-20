@@ -5,7 +5,7 @@ function HomePage({ allPosts }) {
 
   const displayPosts = allPosts.map(post => (
     <div>
-      <Link><h4 className="text-2xl">{post.title}</h4></Link>
+      <Link to={`/posts/${post.id}`}><h4 className="text-2xl">{post.title}</h4></Link>
       <p>By: {post.character.name}</p>
       <p>Comments: {post.comments.length}</p>
       <br></br>
