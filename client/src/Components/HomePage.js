@@ -12,7 +12,7 @@ function HomePage({ allPosts }) {
     </div>
   ))
 
-  console.log(allPosts)
+  // console.log(allPosts)
 
   return (
     <div>

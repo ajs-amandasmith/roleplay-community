@@ -1,14 +1,16 @@
 import React, { useContext, useState } from "react";
-import { UserContext } from "../Context/user";
+// import { UserContext } from "../Context/user";
+import { useSelector } from "react-redux";
 import AddAvatarForm from "./AddAvatarForm";
 
 function ProfilePage() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
+  const user = useSelector(state => state);
   const [addAvatar, setAddAvatar] = useState(false);
 
-  console.log('comments', user.comments)
-  console.log('posts', user.posts)
-  console.log('characters', user.characters)
+  // console.log('comments', user.comments)
+  // console.log('posts', user.posts)
+  // console.log('characters', user.characters)
 
   function handleAddAvatar() {
     setAddAvatar(!addAvatar)
