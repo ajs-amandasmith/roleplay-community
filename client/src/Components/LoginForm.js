@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../Context/user";
+import { useSelector, useDispatch } from "react-redux";
+// import { UserContext } from "../Context/user";
 import { Redirect } from "react-router-dom";
 
 function LoginForm() {
-  const { user, setUser } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const user = useSelector(state => state);
   const [toHome, setToHome] = useState(false);
   // sets the form's state
   const [username, setUsername] = useState("");
@@ -27,7 +30,8 @@ function LoginForm() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then(user => {
-            setUser(user);
+            // setUser(user);
+            dispatch({ type: "set-user", payload: user })
             setToHome(true);
           })
         } else {

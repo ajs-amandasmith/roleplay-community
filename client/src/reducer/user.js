@@ -1,5 +1,4 @@
-const initialState = {
-};
+const initialState = { };
 
 function userReducer(state = initialState, action) {
   switch(action.type) {
@@ -7,7 +6,7 @@ function userReducer(state = initialState, action) {
       state = action.payload
       return state;
     case "remove-user":
-      state = null;
+      state = { };
     default:
       return state;
   }
