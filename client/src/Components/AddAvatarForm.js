@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { UserContext } from "../Context/user"; 
 
 function AddAvatarForm({ addAvatar, setAddAvatar }) {
   const [avatar, setAvatar] = useState();
-  const [errors, setErrors] = useState();
-  // const { user, setUser } = useContext(UserContext);
+  // const [errors, setErrors] = useState();
   const user = useSelector(state => state);
   const dispatch = useDispatch();
 
@@ -25,12 +23,10 @@ function AddAvatarForm({ addAvatar, setAddAvatar }) {
             setAddAvatar(!addAvatar)
           })
         } else {
-          r.json().then((err) => setErrors(err.errors))
+          // r.json().then((err) => setErrors(err.errors))
         }
       })
   }
-
-  console.log('user', user);
 
   return (
     <form onSubmit={handleSubmit}>

@@ -7,17 +7,17 @@ function Post() {
   const [comments, setComments] = useState([]);
   const [character, setCharacter] = useState([]);
   const [user, setUser] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
   console.log('id', id)
 
   useEffect(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     console.log('i fire once')
     fetch(`/posts/${id}`)
       .then(r => {
-        setIsLoading(false);
+        // setIsLoading(false);
         if (r.ok) {
           r.json().then(post => {
             setCurrentPost(post);
@@ -29,7 +29,7 @@ function Post() {
           r.json().then(err => setErrors(err));
         }
       })
-  }, [])
+  }, [id])
 
   console.log('post', currentPost)
   // console.log('error', errors)

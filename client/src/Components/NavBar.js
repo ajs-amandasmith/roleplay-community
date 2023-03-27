@@ -1,13 +1,10 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { UserContext } from "../Context/user";
 
 function NavBar() {
-  // const { user, setUser } = useContext(UserContext);
   const user = useSelector(state => state)
   const dispatch = useDispatch();
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
 
   // logout function
   function handleLogout() {
@@ -16,7 +13,6 @@ function NavBar() {
     ).then(r => {
       if(r.ok) {
         dispatch({ type: "remove-user"})
-        setIsLoggedOut(true);
       }
     })
   }

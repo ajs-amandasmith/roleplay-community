@@ -1,12 +1,10 @@
-import React, { useState, useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
-// import { UserContext } from "../Context/user";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 function LoginForm() {
-  // const { user, setUser } = useContext(UserContext);
   const dispatch = useDispatch();
-  const user = useSelector(state => state);
+  // const user = useSelector(state => state);
   const [toHome, setToHome] = useState(false);
   // sets the form's state
   const [username, setUsername] = useState("");
