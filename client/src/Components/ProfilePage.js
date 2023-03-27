@@ -16,6 +16,8 @@ function ProfilePage() {
     setAddAvatar(!addAvatar)
   }
 
+  // console.log('profile avatar', user.avatar)
+
   return (
     <div>
       <h1 className="mt-1 text-5xl font-medium leading-tight">Welcome, {user.username}!</h1>
@@ -25,7 +27,7 @@ function ProfilePage() {
         <button className="border" onClick={handleAddAvatar}>Cancel</button> :
         <button className="border" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
       }
-      {addAvatar ? <AddAvatarForm /> : null}
+      {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
     </div>
   )
 }

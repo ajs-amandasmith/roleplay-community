@@ -7,9 +7,17 @@ function userReducer(state = initialState, action) {
       return state;
     case "remove-user":
       state = { };
+      return state;
+    case "update-avatar":
+      return {
+        ...state,
+        avatar: action.payload
+       }
     default:
       return state;
   }
 }
+
+
 
 export default userReducer;

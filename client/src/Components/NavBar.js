@@ -20,7 +20,7 @@ function NavBar() {
       }
     })
   }
-  console.log('user', user);
+  // console.log('user', user);
 
   return (
     <div className="bg-sky-600">

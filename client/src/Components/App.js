@@ -15,7 +15,7 @@ function App() {
   const user = useSelector((state) => state)
   const dispatch = useDispatch();
 
-  console.log('user', user)
+  // console.log('user', user)
 
   useEffect(() => {
     fetch("/me").then((r) => {
