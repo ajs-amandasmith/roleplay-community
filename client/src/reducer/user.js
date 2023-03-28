@@ -13,6 +13,11 @@ function userReducer(state = initialState, action) {
         ...state,
         avatar: action.payload
        }
+       case "add-character":
+        return {
+          ...state,
+          characters: [...state.characters, action.payload]
+        }
     default:
       return state;
   }

@@ -7,6 +7,12 @@ function ProfilePage() {
   const user = useSelector(state => state);
   const [addAvatar, setAddAvatar] = useState(false);
 
+  const displayCharacters = user.characters.map(character => (
+    <div>
+      <p>{character.name}</p>
+    </div>
+  ))
+
   // console.log('comments', user.comments)
   // console.log('posts', user.posts)
   // console.log('characters', user.characters)
@@ -15,7 +21,7 @@ function ProfilePage() {
     setAddAvatar(!addAvatar)
   }
 
-  // console.log('profile avatar', user.avatar)
+  console.log('user', user.characters);
 
   return (
     <div>
@@ -27,6 +33,7 @@ function ProfilePage() {
         <button className="border" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
       }
       {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
+      {displayCharacters}
     </div>
   )
 }
