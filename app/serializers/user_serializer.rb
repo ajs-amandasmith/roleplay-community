@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :username, :about_me, :avatar, :posts
 
   has_many :posts
-  has_many :characters
+  has_many :characters, serializer: UserCharacterSerializer
   has_many :comments
 
   def avatar
