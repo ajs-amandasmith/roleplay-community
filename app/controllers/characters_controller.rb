@@ -5,9 +5,20 @@ class CharactersController < ApplicationController
     render json: Character.all
   end
 
+  def show
+    character = Character.find(params[:id])
+    render json: character
+  end
+
   def create
     user = @current_user
     character = user.characters.create!(character_params)
+    render json: character, status: :created
+  end
+
+  def update
+    character = Character.find(params[:id])
+    character.update!(character_params)
     render json: character, status: :created
   end
 

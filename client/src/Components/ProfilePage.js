@@ -8,7 +8,7 @@ function ProfilePage() {
   const [addAvatar, setAddAvatar] = useState(false);
 
   const displayCharacters = user.characters.map(character => (
-    <div>
+    <div key={character.id}>
       <p>{character.name}</p>
     </div>
   ))
@@ -20,8 +20,6 @@ function ProfilePage() {
   function handleAddAvatar() {
     setAddAvatar(!addAvatar)
   }
-
-  console.log('user', user.characters);
 
   return (
     <div>
