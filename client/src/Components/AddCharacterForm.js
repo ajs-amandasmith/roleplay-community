@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { addCharacter } from "../reducer/user.js"
 
 function AddCharacterForm() {
   const [name, setName] = useState('');
@@ -22,7 +23,7 @@ function AddCharacterForm() {
     }).then(r => {
       if (r.ok) {
         r.json().then(character => {
-          dispatch({type: "add-character", payload: character})
+          dispatch(addCharacter(character))
         })
       } else {
         r.json().then(err => setErrors(err.errors))

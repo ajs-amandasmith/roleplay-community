@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { UserProvider } from "../Context/user";
 import { useDispatch } from "react-redux";
 import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
@@ -34,7 +33,6 @@ function App() {
   }, [])
   
   return (
-    <UserProvider>
       <BrowserRouter>
         <div className="App">
           <NavBar />
@@ -59,9 +57,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-      </BrowserRouter>
-    </UserProvider>
-   
+      </BrowserRouter>   
   );
 }
 

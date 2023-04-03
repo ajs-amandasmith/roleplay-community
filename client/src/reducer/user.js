@@ -1,5 +1,9 @@
 const initialState = { };
 
+export function addCharacter(character) {
+  return { type: "add-character", payload: character }
+}
+
 function userReducer(state = initialState, action) {
   switch(action.type) {
     case "set-user":

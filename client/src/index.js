@@ -6,9 +6,13 @@ import reportWebVitals from './reportWebVitals';
 // import { UserProvider } from "./Context/user";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./reducer/user"
 
-const store = createStore(userReducer);
+const store = createStore(
+  userReducer,
+  composeWithDevTools()
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
