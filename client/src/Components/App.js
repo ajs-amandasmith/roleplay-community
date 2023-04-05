@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUser } from "../reducer/user";
 import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
 import CharacterPage from "./CharacterPage";
@@ -12,16 +13,23 @@ import Post from "./Post";
 function App() {
   const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
+  const user = useSelector(state => state)
 
   useEffect(() => {
-    fetch("/me").then((r) => {
-      if(r.ok) {
-        r.json().then((data) => {
-          dispatch({ type: "set-user", payload: data})
-        })
-      }
-    })
-  })
+    dispatch(fetchUser());
+  }, [])
+
+  // useEffect(() => {
+  //   return function (dispatch) {
+  //     fetch("/me").then((r) => {
+  //       if(r.ok) {
+  //         r.json().then((data) => {
+  //           dispatch({ type: "set-user", payload: data})
+  //         })
+  //       }
+  //     })
+  //   }
+  // })
 
   useEffect(() => {
     fetch('/posts')

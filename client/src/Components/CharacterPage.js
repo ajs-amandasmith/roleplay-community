@@ -5,7 +5,8 @@ import blank_avatar from '../images/blank_avatar.png';
 import AddCharacterAvatarForm from "./AddCharacterAvatarForm";
 
 function CharacterPage() {
-  const user = useSelector(state => state)
+  const user = useSelector(state => state.user)
+  const status = useSelector(state => state.status)
   const characters = user.characters
   console.log(characters)
 
@@ -22,9 +23,13 @@ function CharacterPage() {
 
   return (
     <div>
-      <AddCharacterForm />
-      Character Page
-      {displayCharacters}
+      {status === "loading" ? "Loading..." :
+        <div>
+          <AddCharacterForm />
+          Character Page
+          {displayCharacters}
+        </div>
+      }
     </div>
   )
 }

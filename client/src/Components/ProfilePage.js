@@ -4,14 +4,18 @@ import AddAvatarForm from "./AddAvatarForm";
 
 function ProfilePage() {
   // const { user } = useContext(UserContext);
-  const user = useSelector(state => state);
+  const user = useSelector(state => state.user);
+  const status = useSelector(state => state.status);
+  const characters = useSelector(state => state.user.characters);
   const [addAvatar, setAddAvatar] = useState(false);
 
-  const displayCharacters = user.characters.map(character => (
-    <div key={character.id}>
-      <p>{character.name}</p>
-    </div>
-  ))
+  // const displayCharacters = characters.map(character => (
+  //   <div key={character.id}>
+  //     <p>{character.name}</p>
+  //   </div>
+  // ))
+
+  console.log(user)
 
   // console.log('comments', user.comments)
   // console.log('posts', user.posts)
@@ -23,15 +27,19 @@ function ProfilePage() {
 
   return (
     <div>
-      <h1 className="mt-1 text-5xl font-medium leading-tight">Welcome, {user.username}!</h1>
-      <h2 className="mt-1 text-4xl">You can update your profile settings here!</h2>
-      <img className="h=[100px] w-[100px] object-cover" src={user?.avatar} alt='user profile' />
-      {addAvatar ? 
-        <button className="border" onClick={handleAddAvatar}>Cancel</button> :
-        <button className="border" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
-      }
-      {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
-      {displayCharacters}
+      {status === "loading" ? "Loading..." :
+      <div>
+        <h1 className="mt-1 text-5xl font-medium leading-tight">Welcome, {user.username}!</h1>
+        <h2 className="mt-1 text-4xl">You can update your profile settings here!</h2>
+        <img className="h=[100px] w-[100px] object-cover" src={user?.avatar} alt='user profile' />
+        {addAvatar ? 
+          <button className="border" onClick={handleAddAvatar}>Cancel</button> :
+          <button className="border" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
+        }
+        {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
+        {/* {displayCharacters} */}
+      </div>
+    }
     </div>
   )
 }

@@ -3,15 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
-// import { UserProvider } from "./Context/user";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunkMiddleware from "redux-thunk";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import userReducer from "./reducer/user"
 
+const composedEnhancer = compose(applyMiddleware(thunkMiddleware), composeWithDevTools());
+
 const store = createStore(
   userReducer,
-  composeWithDevTools()
+  composedEnhancer
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,3 +31,4 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
