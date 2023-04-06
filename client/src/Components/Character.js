@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import blank_avatar from '../images/blank_avatar.png';
 import AddCharacterAvatarForm from './AddCharacterAvatarForm';
+import UpdateCharacterForm from "./UpdateCharacterForm";
 
 function Character() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ function Character() {
       <h1>{character.name}</h1>
       <img className="h=[100px] w-[100px] object-cover" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
       <AddCharacterAvatarForm character={character} updateCharacter={updateCharacter} />
+      <UpdateCharacterForm character={character} updateCharacter={updateCharacter} />
     </div>
   )
 }

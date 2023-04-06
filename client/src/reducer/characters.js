@@ -32,6 +32,12 @@ export default function charactersReducer(state = initialState, action) {
         return character
       })
 
+    case "characters/update":
+      return state.map(character => {
+        if (character.id === action.payload.id) return action.payload;
+        return character
+      })
+
     case "user/get/loaded":
       return action.payload.characters
 
