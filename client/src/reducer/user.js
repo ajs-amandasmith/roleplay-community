@@ -6,7 +6,6 @@ export function fetchUser() {
       if(r.ok) {
         r.json().then(user => {
           dispatch({ type: "user/get/loaded", payload: user });
-          console.log(user)
         })
       } else {
         r.json().then(err => {
@@ -26,7 +25,6 @@ const initialState = {
 export default function userReducer(state = initialState, action) {
   switch(action.type) {
     case "user/get/loaded":
-      console.log('payload', action.payload)
       return {
         ...state,
         status: "idle",

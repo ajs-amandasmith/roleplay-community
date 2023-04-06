@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AddCharacterForm from "./AddCharacterForm";
 import { useSelector } from "react-redux";
 import blank_avatar from '../images/blank_avatar.png';
@@ -8,18 +9,14 @@ function CharacterPage() {
   const user = useSelector(state => state.user)
   const status = useSelector(state => state.status)
   const characters = useSelector(state => state.characters)
-  console.log(characters)
 
   const displayCharacters = characters.map(character => (
     <div key={character.id}>
-      <h3>{character.name}</h3>
+      <Link to={`/characters/${character.id}`}><h3>{character.name}</h3></Link>
       <img className="h=[100px] w-[100px] object-cover" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
       <AddCharacterAvatarForm character={character} />
     </div>
   ))
-
-  // console.log('user', typeof user.avatar)
-  // console.log(typeof characters[0].avatar)
 
   return (
     <div>

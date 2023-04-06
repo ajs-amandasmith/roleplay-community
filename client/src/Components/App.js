@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "../reducer/user";
 import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
+import Character from "./Character";
 import CharacterPage from "./CharacterPage";
 import HomePage from "./HomePage";
 import LoginForm from "./LoginForm";
@@ -41,6 +42,9 @@ function App() {
             </Route>
             <Route path="/profile">
                 <ProfilePage />
+            </Route>
+            <Route path="/characters/:id">
+              <Character />
             </Route>
             <Route path="/characters">
               <CharacterPage />

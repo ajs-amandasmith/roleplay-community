@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-function AddCharacterAvatarForm({ character }) {
+function AddCharacterAvatarForm({ character, updateCharacter }) {
   const [charAvatar, setCharAvatar] = useState();
   const [errors, setErrors] = useState();
   const user = useSelector(state => state);
   const dispatch = useDispatch();
   
-  console.log(character.id)
-  console.log(character)
-  console.log('ava', charAvatar)
-  
+ 
   function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -22,8 +19,8 @@ function AddCharacterAvatarForm({ character }) {
       .then(r => {
         if (r.ok) {
           r.json().then(data => {
-            console.log('data', data)
-            console.log('formData', formData)
+            dispatch({ type: "characters/avatar/add", payload: data});
+            updateCharacter(data);
           })
         } else {
           r.json().then(err => setErrors(err.errors))
