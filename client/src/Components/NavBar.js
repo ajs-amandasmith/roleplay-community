@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 function NavBar() {
-  const user = useSelector(state => state)
+  const user = useSelector(state => state.user.user)
   const dispatch = useDispatch();
 
   // logout function
@@ -12,7 +12,7 @@ function NavBar() {
       { method: "DELETE" }
     ).then(r => {
       if(r.ok) {
-        dispatch({ type: "remove-user"})
+        dispatch({ type: "user/remove"})
       }
     })
   }
