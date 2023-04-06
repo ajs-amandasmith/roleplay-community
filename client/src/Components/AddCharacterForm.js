@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCharacter } from "../reducer/user.js"
+import { addCharacter } from "../reducer/characters.js"
 
 function AddCharacterForm() {
   const [name, setName] = useState('');

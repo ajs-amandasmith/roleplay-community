@@ -3,23 +3,26 @@ import { useSelector } from "react-redux";
 import AddAvatarForm from "./AddAvatarForm";
 
 function ProfilePage() {
-  // const { user } = useContext(UserContext);
-  const user = useSelector(state => state.user);
-  const status = useSelector(state => state.status);
-  const characters = useSelector(state => state.user.characters);
+  const state = useSelector(state => state)
+  const user = useSelector(state => state.user.user);
+  const status = useSelector(state => state.user.status);
+  const characters = useSelector(state => state.characters);
   const [addAvatar, setAddAvatar] = useState(false);
 
-  // const displayCharacters = characters.map(character => (
-  //   <div key={character.id}>
-  //     <p>{character.name}</p>
-  //   </div>
-  // ))
+  const displayCharacters = characters.map(character => (
+    <div key={character.id}>
+      <p>{character.name}</p>
+    </div>
+  ))
 
-  console.log(user)
+  console.log('state', state)
+  console.log('user', user)
+  console.log('status', status);
+  console.log('characters', characters)
 
   // console.log('comments', user.comments)
   // console.log('posts', user.posts)
-  // console.log('characters', user.characters)
+  
 
   function handleAddAvatar() {
     setAddAvatar(!addAvatar)
@@ -37,7 +40,7 @@ function ProfilePage() {
           <button className="border" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
         }
         {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
-        {/* {displayCharacters} */}
+        {displayCharacters}
       </div>
     }
     </div>

@@ -7,7 +7,7 @@ import AddCharacterAvatarForm from "./AddCharacterAvatarForm";
 function CharacterPage() {
   const user = useSelector(state => state.user)
   const status = useSelector(state => state.status)
-  const characters = user.characters
+  const characters = useSelector(state => state.characters)
   console.log(characters)
 
   const displayCharacters = characters.map(character => (
@@ -18,8 +18,8 @@ function CharacterPage() {
     </div>
   ))
 
-  console.log('user', typeof user.avatar)
-  console.log(typeof characters[0].avatar)
+  // console.log('user', typeof user.avatar)
+  // console.log(typeof characters[0].avatar)
 
   return (
     <div>

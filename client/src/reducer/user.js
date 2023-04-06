@@ -1,72 +1,59 @@
-const initialState = { 
-  user: {},
-  status: "idle"
-};
-
+// Action Creators:
 export function fetchUser() {
   return function (dispatch) {
-    dispatch({ type: "set-user-loading" });
+    dispatch({ type: "user/get/loading" });
     fetch("/me").then(r => {
       if(r.ok) {
         r.json().then(user => {
-          dispatch({ type: "set-user-loaded", payload: user });
+          dispatch({ type: "user/get/loaded", payload: user });
+          console.log(user)
         })
       } else {
         r.json().then(err => {
-          dispatch({ type: "set-user-loaded", payload: err })
+          dispatch({ type: "get/user/loaded", payload: err })
         })
       }
     })
   }
 }
 
-// useEffect(() => {
-//   return function (dispatch) {
-//     fetch("/me").then((r) => {
-//       if(r.ok) {
-//         r.json().then((data) => {
-//           dispatch({ type: "set-user", payload: data})
-//         })
-//       }
-//     })
-//   }
-// })
+// Reducers
+const initialState = { 
+  user: {},
+  status: "idle"
+};
 
-export function addCharacter(character) {
-  return { type: "add-character", payload: character }
-}
-
-function userReducer(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
   switch(action.type) {
-    case "set-user-loaded":
+    case "user/get/loaded":
+      console.log('payload', action.payload)
       return {
         ...state,
         status: "idle",
         user: action.payload
       };
-    case "set-user-loading":
+
+    case "user/get/loading":
       return {
-        ...state,
+        user: {},
         status: "loading"
       }
-    case "remove-user":
-      state = { };
-      return state;
-    case "update-avatar":
+
+    case "user/remove":
       return {
         ...state,
-        avatar: action.payload
-       }
-       case "add-character":
-        return {
-          ...state,
-          characters: [...state.characters, action.payload]
+        user: {}
+      }
+
+    case "user/avatar/update":
+      return {
+        ...state,
+        user: {
+          avatar: action.payload
         }
+      }
+
     default:
       return state;
   }
 }
-
-
-
-export default userReducer;

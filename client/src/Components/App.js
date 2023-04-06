@@ -13,23 +13,11 @@ import Post from "./Post";
 function App() {
   const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
-  const user = useSelector(state => state)
+  const user = useSelector(state => state.user)
 
   useEffect(() => {
     dispatch(fetchUser());
   }, [])
-
-  // useEffect(() => {
-  //   return function (dispatch) {
-  //     fetch("/me").then((r) => {
-  //       if(r.ok) {
-  //         r.json().then((data) => {
-  //           dispatch({ type: "set-user", payload: data})
-  //         })
-  //       }
-  //     })
-  //   }
-  // })
 
   useEffect(() => {
     fetch('/posts')

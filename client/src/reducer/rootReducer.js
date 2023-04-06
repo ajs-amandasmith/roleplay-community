@@ -1,50 +1,10 @@
-const initialState = {
-  user: {},
-  characters: [],
-  posts: [],
-  comments: [],
-  status: "idle"
-}
+import { combineReducers } from "redux";
+import userReducer from "./user";
+import charactersReducer from "./characters";
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "user/get/loaded":
-      return {
-        ...state,
-        status: "idle",
-        user: action.payload
-      }
+const rootReducer = combineReducers({
+  user: userReducer,
+  characters: charactersReducer
+})
 
-    case "user/get/loading":
-      return {
-        ...state,
-        status: "loading"
-      }
-
-    case "user/remove":
-      return {
-        ...state,
-        user: {}
-      }
-    
-    case "user/avatar/update":
-      return {
-        ...state,
-        user: {
-          avatar: action.payload
-        }
-      }
-
-    case "characters/add":
-      return {
-        ...state,
-        characters: [
-          ...state.characters,
-          action.payload
-        ]
-      }
-
-    default:
-      return state;
-  }
-}
+export default rootReducer;
