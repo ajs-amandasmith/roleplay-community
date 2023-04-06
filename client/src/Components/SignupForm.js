@@ -32,7 +32,7 @@ function SignupForm() {
       if(r.ok) {
         r.json().then(user => {
           setSignedUp(true)
-          dispatch({ type: "set-user", payload: user})
+          dispatch({ type: "user/get/loaded", payload: user})
         })
       } else {
         r.json().then(err => setErrors(err.errors))
