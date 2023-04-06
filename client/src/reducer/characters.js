@@ -24,7 +24,7 @@ export default function charactersReducer(state = initialState, action) {
       ]
 
     case "characters/remove":
-      return state.filter(character => character.id !== action.payload);
+      return state.filter(character => character.id !== action.payload.id);
 
     case "characters/avatar/add":
       return state.map(character => {
