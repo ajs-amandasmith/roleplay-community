@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AddPostForm from "./AddPostForm";
 
 function HomePage({ allPosts }) {
 
@@ -12,11 +13,10 @@ function HomePage({ allPosts }) {
     </div>
   ))
 
-  // console.log(allPosts)
-
   return (
     <div>
       <h2 className="text-3xl">Available Posts</h2>
+      <AddPostForm />
       <br></br>
       {displayPosts}
     </div>

@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   skip_before_action :authorize
 
   def index
-    render json: Post.all, include: [:tags, :comments]
+    render json: Post.all.with_attached_image, include: [:tags, :comments]
   end
 
   def show
@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.permit(:title, :post, :character, :user, :comments)
+    params.permit(:title, :post, :character, :user, :comments, :image)
   end
 
 end

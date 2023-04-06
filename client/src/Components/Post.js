@@ -14,7 +14,6 @@ function Post() {
 
   useEffect(() => {
     // setIsLoading(true);
-    console.log('i fire once')
     fetch(`/posts/${id}`)
       .then(r => {
         // setIsLoading(false);
@@ -45,6 +44,7 @@ function Post() {
   return (
     <div>
       <div>
+      <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='character-avatar' />
         <h1 className="text-3xl">{currentPost.title}</h1>
         <h3 className="text-2xl">{character.name}</h3>
         <h4>{user.username}</h4>
