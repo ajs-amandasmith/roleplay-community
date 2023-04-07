@@ -21,7 +21,7 @@ function AddAvatarForm({ addAvatar, setAddAvatar }) {
           r.json().then(data => {
             console.log('data', data)
             console.log('formData', formData)
-            dispatch({ type: 'update-avatar', payload: data.avatar})
+            dispatch({ type: 'user/avatar/update', payload: data.avatar})
             setAddAvatar(!addAvatar)
           })
         } else {
