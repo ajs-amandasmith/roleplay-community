@@ -18,6 +18,12 @@ class PostsController < ApplicationController
     render json: post, status: :created
   end
 
+  def update
+    post = Post.find(params[:id])
+    post.update!(post_params)
+    render json: post, status: :created
+  end
+
   private
 
   def post_params

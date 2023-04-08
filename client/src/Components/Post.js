@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
+import AddPostImage from "./AddPostImage";
 
 function Post() {
   const { id } = useParams();
@@ -10,10 +11,11 @@ function Post() {
   // const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  console.log('id', id)
+  // console.log('id', id)
 
   useEffect(() => {
     // setIsLoading(true);
+    setErrors([]);
     fetch(`/posts/${id}`)
       .then(r => {
         // setIsLoading(false);
@@ -30,7 +32,11 @@ function Post() {
       })
   }, [id])
 
-  console.log('post', currentPost)
+  function updatePost(post) {
+    setCurrentPost(post);
+  }
+
+  // console.log('post', currentPost)
   // console.log('error', errors)
   // console.log('comments', comments);
   // console.log('character', currentPost.character.name)
@@ -43,6 +49,7 @@ function Post() {
   
   return (
     <div>
+      <AddPostImage currentPost={currentPost} updatePost={updatePost} />
       <div>
       <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='character-avatar' />
         <h1 className="text-3xl">{currentPost.title}</h1>
@@ -57,6 +64,9 @@ function Post() {
         {comments.length === 0 ? "No Comments" : displayComments}
       </div>
       } */}
+      {errors.map(err => (
+          <p key={err} className="text-red-600">{err}</p>
+        ))}
     </div>
   )
 }

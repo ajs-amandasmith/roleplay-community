@@ -6,7 +6,7 @@ function AddPostForm({ updateAllPosts }) {
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
   const [characterId, setCharacterId] = useState("");
-  const [postImage, setPostImage] = useState("");
+  const [errors, setErrors] = useState([]);
   const user = useSelector(state => state.user.user);
   const characters = useSelector(state => state.characters);
 
@@ -14,14 +14,16 @@ function AddPostForm({ updateAllPosts }) {
     <option key={character.id} id={character.id}>{character.name}</option>
   ))
 
+  console.log(errors)
+
   function handleSubmit(e) {
     e.preventDefault();
+    setErrors([]);
     const formData = new FormData();
     formData.append('title', title);
     formData.append('post', post);
     formData.append('character_id', characterId);
     formData.append('user_id', user.id);
-    formData.append('image', postImage);
     fetch("/posts", {
       method: "POST",
       body: formData
@@ -33,7 +35,7 @@ function AddPostForm({ updateAllPosts }) {
             updateAllPosts(post);
           })
         } else {
-          r.json().then(err => console.log(err))
+          r.json().then(err => setErrors(err.errors))
         }
       })
   }
@@ -49,9 +51,6 @@ function AddPostForm({ updateAllPosts }) {
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
-        <br></br>
-        <label htmlFor="post-image">Image: </label>
-        <input id="post-image" type="file" accept="image" className="border" onChange={e => setPostImage(e.target.files[0])}></input>
         <br></br>
         <label htmlFor="characters">Select a Character: </label>
         <select id="characters" name="characters" onChange={e => setCharacterId(e.target[e.target.selectedIndex].id)}>
@@ -69,6 +68,9 @@ function AddPostForm({ updateAllPosts }) {
         <br></br>
         <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
       </form>
+      {errors.map(err => (
+          <p key={err} className="text-red-600">{err}</p>
+        ))}
     </div>
   )
 }

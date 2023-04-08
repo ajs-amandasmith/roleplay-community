@@ -18,7 +18,13 @@ export default function postsReducer(state = initialState, action) {
         if (post.id === action.payload.id) return action.payload;
         return post;
       })
-      
+
+      case "posts/image/add":
+        return state.map(post => {
+          if (post.id === action.payload.id) return action.payload;
+          return post
+        })
+
     case "user/get/loaded":
       return action.payload.posts
 
