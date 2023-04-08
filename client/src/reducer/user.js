@@ -9,7 +9,7 @@ export function fetchUser() {
         })
       } else {
         r.json().then(err => {
-          dispatch({ type: "get/user/loaded", payload: err })
+          dispatch({ type: "user/get/loaded", payload: err })
         })
       }
     })

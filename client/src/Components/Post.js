@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import AddPostImage from "./AddPostImage";
+import UpdatePostForm from "./UpdatePostForm";
+import { useSelector } from "react-redux";
 
 function Post() {
   const { id } = useParams();
   const [currentPost, setCurrentPost] = useState({});
-  const [comments, setComments] = useState([]);
-  const [character, setCharacter] = useState([]);
-  const [user, setUser] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [title, setTitle] = useState("")
+  const [character, setCharacter] = useState({});
+  const [postUser, setPostUser] = useState({});
   const [errors, setErrors] = useState([]);
-
-  // console.log('id', id)
+  const user = useSelector(state => state.user.user)
 
   useEffect(() => {
-    // setIsLoading(true);
     setErrors([]);
     fetch(`/posts/${id}`)
       .then(r => {
-        // setIsLoading(false);
         if (r.ok) {
           r.json().then(post => {
             setCurrentPost(post);
-            setComments(post.comments);
             setCharacter(post.character);
-            setUser(post.user);
+            setPostUser(post.user);
+            setTitle(post.title);
           });
         } else {
           r.json().then(err => setErrors(err));
@@ -36,34 +34,28 @@ function Post() {
     setCurrentPost(post);
   }
 
-  // console.log('post', currentPost)
-  // console.log('error', errors)
-  // console.log('comments', comments);
-  // console.log('character', currentPost.character.name)
+  console.log(character)
 
-  const displayComments = comments.map(comment => (
-    <div>
 
-    </div>
-  ))
-  
   return (
     <div>
-      <AddPostImage currentPost={currentPost} updatePost={updatePost} />
+      {
+        user.id === postUser.id ? 
+        <AddPostImage currentPost={currentPost} updatePost={updatePost} /> 
+        : null
+      }
+      {
+        user.id === postUser.id ? 
+        <UpdatePostForm currentPost={currentPost} updatePost={updatePost} title={title} setTitle={setTitle} character={character} setCharacter={setCharacter} /> 
+        : null
+      }
       <div>
-      <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='character-avatar' />
-        <h1 className="text-3xl">{currentPost.title}</h1>
+        <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='post-image' />
+        <h1 className="text-3xl">{title}</h1>
         <h3 className="text-2xl">{character.name}</h3>
-        <h4>{user.username}</h4>
+        <h4>{postUser.username}</h4>
+        <p>{currentPost.post}</p>
       </div>
-      {/* {isLoading ? "Page Loading" :
-      <div>
-        <h1 className="text-3xl">{currentPost.title}</h1>
-        <h3 className="text-2xl">{currentPost.character.name}</h3>
-        <h4>{currentPost.user.username}</h4>
-        {comments.length === 0 ? "No Comments" : displayComments}
-      </div>
-      } */}
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>
         ))}

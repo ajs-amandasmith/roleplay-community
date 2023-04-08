@@ -14,16 +14,17 @@ export default function postsReducer(state = initialState, action) {
       return state.filter(post => post.id !== action.payload.id);
 
     case "posts/update":
+      console.log(action.payload)
       return state.map(post => {
         if (post.id === action.payload.id) return action.payload;
         return post;
       })
 
-      case "posts/image/add":
-        return state.map(post => {
-          if (post.id === action.payload.id) return action.payload;
-          return post
-        })
+    case "posts/image/add":
+      return state.map(post => {
+        if (post.id === action.payload.id) return action.payload;
+        return post
+      })
 
     case "user/get/loaded":
       return action.payload.posts
