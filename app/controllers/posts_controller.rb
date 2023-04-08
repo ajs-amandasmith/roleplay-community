@@ -1,7 +1,8 @@
 require 'debug'
 
 class PostsController < ApplicationController
-  # skip_before_action :authorize
+  skip_before_action :authorize, only: :index
+  skip_before_action :authorize, only: :show
 
   def index
     render json: Post.all.with_attached_image, include: [:tags, :comments]
