@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AddPostForm from "./AddPostForm";
 
-function HomePage({ allPosts }) {
+function HomePage({ allPosts, updateAllPosts }) {
 
   const displayPosts = allPosts.map(post => (
     <div key={post.id}>
@@ -16,7 +16,7 @@ function HomePage({ allPosts }) {
   return (
     <div>
       <h2 className="text-3xl">Available Posts</h2>
-      <AddPostForm />
+      <AddPostForm updateAllPosts={updateAllPosts} />
       <br></br>
       {displayPosts}
     </div>

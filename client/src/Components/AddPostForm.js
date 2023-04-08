@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-function AddPostForm() {
+function AddPostForm({ updateAllPosts }) {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
-  const [character, setCharacter] = useState("");
+  const [characterId, setCharacterId] = useState("");
   const [postImage, setPostImage] = useState("");
   const user = useSelector(state => state.user.user);
   const characters = useSelector(state => state.characters);
 
   const characterOptions = characters.map(character => (
-    <option key={character.id}>{character.name}</option>
+    <option key={character.id} id={character.id}>{character.name}</option>
   ))
 
   function handleSubmit(e) {
@@ -18,7 +19,7 @@ function AddPostForm() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('post', post);
-    formData.append('character_id', character.id);
+    formData.append('character_id', characterId);
     formData.append('user_id', user.id);
     formData.append('image', postImage);
     fetch("/posts", {
@@ -28,7 +29,8 @@ function AddPostForm() {
       .then(r => {
         if (r.ok) {
           r.json().then(post => {
-
+            dispatch({ type: "posts/add", payload: post })
+            updateAllPosts(post);
           })
         } else {
           r.json().then(err => console.log(err))
@@ -52,7 +54,8 @@ function AddPostForm() {
         <input id="post-image" type="file" accept="image" className="border" onChange={e => setPostImage(e.target.files[0])}></input>
         <br></br>
         <label htmlFor="characters">Select a Character: </label>
-        <select id="characters" onChange={e => setCharacter(e.target.value)}>
+        <select id="characters" name="characters" onChange={e => setCharacterId(e.target[e.target.selectedIndex].id)}>
+          <option value="" disabled selected>Select Your Character</option>
           {characterOptions}
         </select>
         <br></br>

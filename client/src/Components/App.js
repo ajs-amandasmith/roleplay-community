@@ -28,6 +28,11 @@ function App() {
         }
       })
   }, [])
+
+  function updateAllPosts(post) {
+    const newPosts = [...allPosts, post]
+    setAllPosts(newPosts)
+  }
   
   return (
       <BrowserRouter>
@@ -35,7 +40,7 @@ function App() {
           <NavBar />
           <Switch>
             <Route exact path="/">
-              <HomePage allPosts={allPosts} />
+              <HomePage allPosts={allPosts} updateAllPosts={updateAllPosts} />
             </Route>
             <Route path="/posts/:id">
               <Post />
