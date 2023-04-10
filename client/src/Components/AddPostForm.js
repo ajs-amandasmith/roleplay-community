@@ -32,7 +32,7 @@ function AddPostForm({ updateAllPosts }) {
         if (r.ok) {
           r.json().then(post => {
             dispatch({ type: "posts/add", payload: post })
-            updateAllPosts(post);
+            updateAllPosts(post, "add");
           })
         } else {
           r.json().then(err => setErrors(err.errors))

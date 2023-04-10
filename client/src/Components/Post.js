@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import AddPostImage from "./AddPostImage";
 import UpdatePostForm from "./UpdatePostForm";
 import { useSelector } from "react-redux";
+import DeletePost from "./DeletePost";
 
-function Post() {
+function Post({ updateAllPosts }) {
   const { id } = useParams();
   const [currentPost, setCurrentPost] = useState({});
   const [title, setTitle] = useState("")
@@ -34,9 +35,6 @@ function Post() {
     setCurrentPost(post);
   }
 
-  console.log(character)
-
-
   return (
     <div>
       {
@@ -47,6 +45,11 @@ function Post() {
       {
         user.id === postUser.id ? 
         <UpdatePostForm currentPost={currentPost} updatePost={updatePost} title={title} setTitle={setTitle} character={character} setCharacter={setCharacter} /> 
+        : null
+      }
+      {
+        user.id === postUser.id ?
+        <DeletePost currentPost={currentPost} updateAllPosts={updateAllPosts} />
         : null
       }
       <div>

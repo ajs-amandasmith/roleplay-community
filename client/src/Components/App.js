@@ -29,9 +29,17 @@ function App() {
       })
   }, [])
 
-  function updateAllPosts(post) {
-    const newPosts = [...allPosts, post]
-    setAllPosts(newPosts)
+  function updateAllPosts(postUpdate, op) {
+    let newPosts;
+    switch(op) {
+      case "add":
+        newPosts = [...allPosts, postUpdate]
+        setAllPosts(newPosts);
+      case "delete":
+        newPosts = allPosts.filter(post => post.id !== postUpdate.id)
+        setAllPosts(newPosts);
+      default:
+    }
   }
   
   return (
@@ -43,7 +51,7 @@ function App() {
               <HomePage allPosts={allPosts} updateAllPosts={updateAllPosts} />
             </Route>
             <Route path="/posts/:id">
-              <Post />
+              <Post updateAllPosts={updateAllPosts} />
             </Route>
             <Route path="/profile">
                 <ProfilePage />
