@@ -4,6 +4,7 @@ class PostSerializer < ActiveModel::Serializer
 
   belongs_to :user, serializer: PostUserSerializer
   belongs_to :character, serializer: PostCharacterSerializer
+  has_many :comments, serializer: PostCommentSerializer
 
   def image
     rails_blob_path(object.image, only_path: true) if object.image.attached?

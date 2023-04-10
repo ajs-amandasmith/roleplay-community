@@ -12,6 +12,7 @@ function Post({ updateAllPosts }) {
   const [character, setCharacter] = useState({});
   const [postUser, setPostUser] = useState({});
   const [errors, setErrors] = useState([]);
+  const [comments, setComments] = useState([]);
   const user = useSelector(state => state.user.user)
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function Post({ updateAllPosts }) {
             setCharacter(post.character);
             setPostUser(post.user);
             setTitle(post.title);
+            setComments(post.comments);
           });
         } else {
           r.json().then(err => setErrors(err));
@@ -35,7 +37,15 @@ function Post({ updateAllPosts }) {
     setCurrentPost(post);
   }
 
-  console.log(currentPost.comments);
+  console.log(comments);
+
+  const displayComments = comments.map(comment => (
+    <div>
+      <p>{comment.comment}</p>
+      <h5>{comment.user.username}</h5>
+      <h5>{comment.character.name}</h5>
+    </div>
+  ))
 
   return (
     <div>
@@ -60,6 +70,7 @@ function Post({ updateAllPosts }) {
         <h3 className="text-2xl">{character.name}</h3>
         <h4>{postUser.username}</h4>
         <p>{currentPost.post}</p>
+        {displayComments}
       </div>
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>
