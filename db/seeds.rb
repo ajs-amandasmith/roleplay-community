@@ -21,9 +21,13 @@ User.create(username: "Writes4U", about_me: "Creating things really is the best 
 User.create(username: "I'M LOUD", about_me: "WRITING MAKES ME HAPPY", password_digest: "ALLCAPS")
 
 Character.create(user_id: 1, name: "Potato Head", about: "Just a potato living in a man's world.")
+Character.create(user_id: 1, name: "Cheddar", about: "You like cheese?")
 Character.create(user_id: 2, name: "Barbie", about: "Sup, y'all?")
 
 Post.create(title: "I am a Post!", post: "This is the first post on this page!", user_id: 1, character_id: 1)
-Post.create(title: "At my Mansion", post: "I welcome everyone to my place so we can have a nice, fun pool party! Woo!", user_id: 2, character_id: 2)
+Post.create(title: "I'm another Post!", post: "This is the best post ever!", user_id: 1, character_id: 2)
+Post.create(title: "At my Mansion", post: "I welcome everyone to my place so we can have a nice, fun pool party! Woo!", user_id: 2, character_id: 3)
+
+Comment.create(comment: "This really is a post.", user_id: 2, post_id: 1, character_id: 3)
 
 puts "✅ Done seeding!"
