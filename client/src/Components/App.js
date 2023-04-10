@@ -35,9 +35,11 @@ function App() {
       case "add":
         newPosts = [...allPosts, postUpdate]
         setAllPosts(newPosts);
+        break;
       case "delete":
         newPosts = allPosts.filter(post => post.id !== postUpdate.id)
         setAllPosts(newPosts);
+        break;
       default:
     }
   }

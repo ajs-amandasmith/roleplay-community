@@ -14,8 +14,6 @@ function AddPostForm({ updateAllPosts }) {
     <option key={character.id} id={character.id}>{character.name}</option>
   ))
 
-  console.log(errors)
-
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);

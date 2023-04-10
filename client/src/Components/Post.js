@@ -35,6 +35,8 @@ function Post({ updateAllPosts }) {
     setCurrentPost(post);
   }
 
+  console.log(currentPost.comments);
+
   return (
     <div>
       {
