@@ -50,15 +50,14 @@ Comment.create(comment: "This really is a post.", user_id: 2, post_id: 1, charac
 Comment.create(comment: "Agreed.", user_id: 1, post_id: 1, character_id: 2)
 
 Tag.create(tag: "post")
-Tag.create(tag: "post")
 Tag.create(tag: "barbie")
 Tag.create(tag: "mansion")
 Tag.create(tag: "cheddar")
 
-TagPost.create(post_id: 1, tag_id: 1)
-TagPost.create(post_id: 2, tag_id: 2)
-TagPost.create(post_id: 3, tag_id: 3)
-TagPost.create(post_id: 3, tag_id: 4)
-TagPost.create(post_id: 2, tag_id: 5)
+PostTag.create(post_id: 1, tag_id: 1)
+PostTag.create(post_id: 2, tag_id: 1)
+PostTag.create(post_id: 3, tag_id: 2)
+PostTag.create(post_id: 3, tag_id: 3)
+PostTag.create(post_id: 2, tag_id: 4)
 
 puts "✅ Done seeding!"

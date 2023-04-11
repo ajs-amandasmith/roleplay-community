@@ -47,15 +47,15 @@ function Post({ updateAllPosts }) {
     setComments(newComments);
   }
 
-  console.log(comments.length)
-
   const displayComments = comments.map(comment => (
     <div key={comment.id}>
       <p>{comment.comment}</p>
-      {/* <h5>{comment.user.username}</h5> */}
-      {/* <h5>{comment.character.name}</h5> */}
+      <h5>{comment.user.username}</h5>
+      <h5>{comment.character.name}</h5>
     </div>
   ))
+
+  console.log(currentPost)
 
   return (
     <div>
