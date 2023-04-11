@@ -24,6 +24,7 @@ export default function postsReducer(state = initialState, action) {
       })
 
     case "user/get/loaded":
+      if (action.payload.errors) return state;
       return action.payload.posts
 
     default:

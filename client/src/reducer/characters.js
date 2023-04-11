@@ -39,6 +39,7 @@ export default function charactersReducer(state = initialState, action) {
       })
 
     case "user/get/loaded":
+      if (action.payload.errors) return state;
       return action.payload.characters
 
     default:

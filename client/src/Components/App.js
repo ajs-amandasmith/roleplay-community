@@ -13,6 +13,7 @@ import Post from "./Post";
 
 function App() {
   const [allPosts, setAllPosts] = useState([]);
+  const [allTags, setAllTags] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,6 +29,15 @@ function App() {
         }
       })
   // eslint-disable-next-line  
+  }, [])
+
+  useEffect(() => {
+    fetch('/tags')
+      .then(r => {
+        if (r.ok) {
+          r.json().then(tags => setAllTags(tags))
+        }
+      })
   }, [])
 
   function updateAllPosts(postUpdate, op) {
@@ -61,10 +71,10 @@ function App() {
           <NavBar />
           <Switch>
             <Route exact path="/">
-              <HomePage allPosts={allPosts} updateAllPosts={updateAllPosts} />
+              <HomePage allPosts={allPosts} updateAllPosts={updateAllPosts} allTags={allTags} />
             </Route>
             <Route path="/posts/:id">
-              <Post updateAllPosts={updateAllPosts} />
+              <Post updateAllPosts={updateAllPosts} allTags={allTags} />
             </Route>
             <Route path="/profile">
                 <ProfilePage />

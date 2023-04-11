@@ -49,10 +49,10 @@ Post.create(title: "At my Mansion", post: "I welcome everyone to my place so we 
 Comment.create(comment: "This really is a post.", user_id: 2, post_id: 1, character_id: 3)
 Comment.create(comment: "Agreed.", user_id: 1, post_id: 1, character_id: 2)
 
-Tag.create(tag: "post")
-Tag.create(tag: "barbie")
-Tag.create(tag: "mansion")
-Tag.create(tag: "cheddar")
+Tag.create(tag: "starter-post")
+Tag.create(tag: "welcome-post")
+Tag.create(tag: "follow-up-post")
+Tag.create(tag: "final-post")
 
 PostTag.create(post_id: 1, tag_id: 1)
 PostTag.create(post_id: 2, tag_id: 1)
