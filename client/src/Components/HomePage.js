@@ -13,8 +13,6 @@ function HomePage({ allPosts, updateAllPosts }) {
     </div>
   ))
 
-  console.log(allPosts)
-
   return (
     <div>
       <h2 className="text-3xl">Available Posts</h2>

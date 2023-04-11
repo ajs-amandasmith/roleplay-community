@@ -14,6 +14,7 @@ function Post({ updateAllPosts }) {
   const [postUser, setPostUser] = useState({});
   const [errors, setErrors] = useState([]);
   const [comments, setComments] = useState([]);
+  const [tags, setTags] = useState([]);
   const user = useSelector(state => state.user.user)
 
   useEffect(() => {
@@ -27,6 +28,7 @@ function Post({ updateAllPosts }) {
             setPostUser(post.user);
             setTitle(post.title);
             setComments(post.comments);
+            setTags(post.tags);
           });
         } else {
           r.json().then(err => setErrors(err));
@@ -55,7 +57,14 @@ function Post({ updateAllPosts }) {
     </div>
   ))
 
-  console.log(currentPost)
+  const displayTags = tags.map(tag => (
+    
+    <div key={tag.id}>
+      <p>{tag.tag.replace(/-/g, ' ')}</p>
+    </div>
+  ))
+
+  console.log(tags)
 
   return (
     <div>
@@ -81,6 +90,7 @@ function Post({ updateAllPosts }) {
         <h4>{postUser.username}</h4>
         <p>{currentPost.post}</p>
         {displayComments}
+        {displayTags}
       </div>
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>
