@@ -4,6 +4,7 @@ import AddPostImage from "./AddPostImage";
 import UpdatePostForm from "./UpdatePostForm";
 import { useSelector } from "react-redux";
 import DeletePost from "./DeletePost";
+import AddCommentForm from "./AddCommentForm";
 
 function Post({ updateAllPosts }) {
   const { id } = useParams();
@@ -37,13 +38,22 @@ function Post({ updateAllPosts }) {
     setCurrentPost(post);
   }
 
-  console.log(comments);
+  function updateComments(comment) {
+    const newComments = [...comments, comment];
+    const newPost = currentPost
+    newPost.comments = newComments
+    console.log(newPost);
+    updateAllPosts(newPost, "update")
+    setComments(newComments);
+  }
+
+  console.log(comments.length)
 
   const displayComments = comments.map(comment => (
-    <div>
+    <div key={comment.id}>
       <p>{comment.comment}</p>
-      <h5>{comment.user.username}</h5>
-      <h5>{comment.character.name}</h5>
+      {/* <h5>{comment.user.username}</h5> */}
+      {/* <h5>{comment.character.name}</h5> */}
     </div>
   ))
 
@@ -65,7 +75,7 @@ function Post({ updateAllPosts }) {
         : null
       }
       <div>
-        <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='post-image' />
+        <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='post' />
         <h1 className="text-3xl">{title}</h1>
         <h3 className="text-2xl">{character.name}</h3>
         <h4>{postUser.username}</h4>
@@ -75,6 +85,7 @@ function Post({ updateAllPosts }) {
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>
         ))}
+      <AddCommentForm currentPost={currentPost} updateComments={updateComments} updatePost={updatePost} />
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchUser } from "../reducer/user";
 import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
@@ -14,10 +14,10 @@ import Post from "./Post";
 function App() {
   const [allPosts, setAllPosts] = useState([]);
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user)
 
   useEffect(() => {
     dispatch(fetchUser());
+  // eslint-disable-next-line  
   }, [])
 
   useEffect(() => {
@@ -27,6 +27,7 @@ function App() {
           r.json().then(posts => setAllPosts(posts))
         }
       })
+  // eslint-disable-next-line  
   }, [])
 
   function updateAllPosts(postUpdate, op) {
@@ -38,6 +39,16 @@ function App() {
         break;
       case "delete":
         newPosts = allPosts.filter(post => post.id !== postUpdate.id)
+        setAllPosts(newPosts);
+        break;
+      case "update":
+        newPosts = allPosts.filter(post => {
+          if (post.id === postUpdate.id) {
+            post.comments = postUpdate.comments;
+            return post;
+          }
+          return post
+        })
         setAllPosts(newPosts);
         break;
       default:
