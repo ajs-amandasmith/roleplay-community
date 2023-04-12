@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function AddPostForm({ updateAllPosts }) {
+function AddPostForm({ updateAllPosts, allTags }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");

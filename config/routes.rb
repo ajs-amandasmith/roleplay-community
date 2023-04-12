@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :tags
   resources :posts
+  resources :post_tags
 
   # users
   get "/me", to: "users#show"

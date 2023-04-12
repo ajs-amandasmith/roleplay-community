@@ -5,8 +5,9 @@ import UpdatePostForm from "./UpdatePostForm";
 import { useSelector } from "react-redux";
 import DeletePost from "./DeletePost";
 import AddCommentForm from "./AddCommentForm";
+import AddTagForm from "./AddTagForm";
 
-function Post({ updateAllPosts }) {
+function Post({ updateAllPosts, allTags }) {
   const { id } = useParams();
   const [currentPost, setCurrentPost] = useState({});
   const [title, setTitle] = useState("")
@@ -15,6 +16,7 @@ function Post({ updateAllPosts }) {
   const [errors, setErrors] = useState([]);
   const [comments, setComments] = useState([]);
   const [tags, setTags] = useState([]);
+  const [availableTags, setAvailableTags] = useState([]);
   const user = useSelector(state => state.user.user)
 
   useEffect(() => {
@@ -36,6 +38,10 @@ function Post({ updateAllPosts }) {
       })
   }, [id])
 
+  useEffect(() => {
+    updateTags();
+  }, [tags])
+
   function updatePost(post) {
     setCurrentPost(post);
   }
@@ -44,9 +50,17 @@ function Post({ updateAllPosts }) {
     const newComments = [...comments, comment];
     const newPost = currentPost
     newPost.comments = newComments
-    console.log(newPost);
     updateAllPosts(newPost, "update")
     setComments(newComments);
+  }
+
+  function updateTags() {
+    const newTags = allTags.filter(tag => {
+      return tags.every(el => {
+        return el.id !== tag.id
+      })
+    })
+    setAvailableTags(newTags)
   }
 
   const displayComments = comments.map(comment => (
@@ -64,13 +78,16 @@ function Post({ updateAllPosts }) {
     </div>
   ))
 
-  console.log(tags)
-
   return (
     <div>
       {
         user.id === postUser.id ? 
         <AddPostImage currentPost={currentPost} updatePost={updatePost} /> 
+        : null
+      }
+      {
+        user.id === postUser.id ?
+        <AddTagForm currentPost={currentPost} allTags={allTags} tags={tags} availableTags={availableTags} />
         : null
       }
       {
