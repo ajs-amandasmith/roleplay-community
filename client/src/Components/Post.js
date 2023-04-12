@@ -38,8 +38,11 @@ function Post({ updateAllPosts, allTags }) {
       })
   }, [id])
 
+  console.log(tags)
+
   useEffect(() => {
     updateTags();
+  // eslint-disable-next-line  
   }, [tags])
 
   function updatePost(post) {
@@ -63,6 +66,11 @@ function Post({ updateAllPosts, allTags }) {
     setAvailableTags(newTags)
   }
 
+  function updatePostTags(tag, id) {
+    const newTags = [...tags, {tag: tag, id: id}];
+    setTags(newTags);
+  }
+
   const displayComments = comments.map(comment => (
     <div key={comment.id}>
       <p>{comment.comment}</p>
@@ -72,7 +80,6 @@ function Post({ updateAllPosts, allTags }) {
   ))
 
   const displayTags = tags.map(tag => (
-    
     <div key={tag.id}>
       <p>{tag.tag.replace(/-/g, ' ')}</p>
     </div>
@@ -87,7 +94,7 @@ function Post({ updateAllPosts, allTags }) {
       }
       {
         user.id === postUser.id ?
-        <AddTagForm currentPost={currentPost} allTags={allTags} tags={tags} availableTags={availableTags} />
+        <AddTagForm currentPost={currentPost} updatePostTags={updatePostTags} availableTags={availableTags} />
         : null
       }
       {

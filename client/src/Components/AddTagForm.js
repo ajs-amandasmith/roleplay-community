@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-function AddTagForm({ currentPost, allTags, tags, availableTags }) {
+function AddTagForm({ currentPost, availableTags, updatePostTags }) {
   const [currentTagId, setCurrentTagId] = useState("");
-
-  console.log(availableTags)
+  const [currentTag, setCurrentTag] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const displayTags = availableTags.map(tag => (
       <option key={tag.id} id={tag.id}>{tag.tag}</option>
@@ -23,10 +23,13 @@ function AddTagForm({ currentPost, allTags, tags, availableTags }) {
     })
       .then(r => {
         if (r.ok) {
-          r.json().then(postTag => console.log(postTag.tag_id))
+          r.json().then(postTag => {
+            updatePostTags(currentTag, currentTagId);
+            console.log(postTag)
+          })
           
         } else {
-          r.json().then(err => console.log(err))
+          r.json().then(err => setErrors(err.errors))
         }
       })
   }
@@ -34,13 +37,24 @@ function AddTagForm({ currentPost, allTags, tags, availableTags }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <select id="post-tag" name="post-tag" onChange={e => setCurrentTagId(parseInt((e.target[e.target.selectedIndex].id)))} defaultValue="Select a Tag">
+        <select 
+          id="post-tag" 
+          name="post-tag" 
+          onChange={e => {
+            setCurrentTagId(parseInt((e.target[e.target.selectedIndex].id))) 
+            setCurrentTag(e.target.value)
+          }} 
+          defaultValue="Select a Tag"
+          // onChange={e => setCurrentTag(e.target.value)}
+        >
           <option disabled="disabled">Select a Tag</option>
           {displayTags}
         </select>        
         <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
       </form>
-
+      {errors.map(err => (
+          <p key={err} className="text-red-600">{err}</p>
+        ))}
     </div>
   )
 }
