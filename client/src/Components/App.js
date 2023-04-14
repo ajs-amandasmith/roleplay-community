@@ -6,10 +6,10 @@ import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
 import Character from "./Character";
 import CharacterPage from "./CharacterPage";
-import HomePage from "./HomePage";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
 import Post from "./Post";
+import LandingPage from "./LandingPage";
 
 function App() {
   const [allPosts, setAllPosts] = useState([]);
@@ -71,7 +71,7 @@ function App() {
           <NavBar />
           <Switch>
             <Route exact path="/">
-              <HomePage allPosts={allPosts} updateAllPosts={updateAllPosts} allTags={allTags} />
+              <LandingPage allPosts={allPosts} updateAllPosts={updateAllPosts} allTags={allTags}/>
             </Route>
             <Route path="/posts/:id">
               <Post updateAllPosts={updateAllPosts} allTags={allTags} />

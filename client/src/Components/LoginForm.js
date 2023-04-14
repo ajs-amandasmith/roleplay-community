@@ -6,7 +6,6 @@ function LoginForm() {
   const dispatch = useDispatch();
   // const user = useSelector(state => state);
   const [toHome, setToHome] = useState(false);
-  // sets the form's state
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
