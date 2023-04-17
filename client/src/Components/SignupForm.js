@@ -46,7 +46,7 @@ function SignupForm() {
 
   // displayed form
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
@@ -83,7 +83,7 @@ function SignupForm() {
           <p key={err} className="text-rose-400">{err}</p>
         ))}
       </form>
-    </div>
+    </>
   )
 }
 

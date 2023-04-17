@@ -21,6 +21,10 @@ code {
     @apply flex justify-center text-5xl font-semibold;
   }
 
+  h2 {
+    @apply flex justify-center text-3xl font-semibold;
+  }
+
   p {
     @apply text-base p-2;
   }

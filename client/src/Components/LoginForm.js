@@ -43,7 +43,7 @@ function LoginForm() {
 
   // displayed form
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit} className="form-login">
         <label htmlFor="login-username">Username:</label>
         <input
@@ -51,9 +51,9 @@ function LoginForm() {
           placeholder="Username"
           id="login-username"
           value={username}
-          onChange={e => setUsername(e.target.value)}
+           onChange={e => setUsername(e.target.value)}
         />
-        <br></br>
+         <br></br>
         <label htmlFor="login-password">Password:</label>
         <input
           className="m-2"
@@ -69,10 +69,10 @@ function LoginForm() {
         </button>
         <br></br>
         {errors.map(err => (
-          <p key={err} className="text-red-600">{err}</p>
+          <p key={err} className="text-rose-400">{err}</p>
         ))}
       </form>
-    </div>
+    </>
   )
 }
 

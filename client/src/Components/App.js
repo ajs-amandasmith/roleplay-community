@@ -6,8 +6,8 @@ import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
 import Character from "./Character";
 import CharacterPage from "./CharacterPage";
-import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
+import LoginPage from "./LoginPage";
+import SignupPage from "./SignupPage";
 import Post from "./Post";
 import LandingPage from "./LandingPage";
 
@@ -69,29 +69,31 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <NavBar />
-          <Switch>
-            <Route exact path="/">
-              <LandingPage allPosts={allPosts} updateAllPosts={updateAllPosts} allTags={allTags}/>
-            </Route>
-            <Route path="/posts/:id">
-              <Post updateAllPosts={updateAllPosts} allTags={allTags} />
-            </Route>
-            <Route path="/profile">
-                <ProfilePage />
-            </Route>
-            <Route path="/characters/:id">
-              <Character />
-            </Route>
-            <Route path="/characters">
-              <CharacterPage />
-            </Route>
-            <Route path="/login">
-                <LoginForm />
-            </Route>
-            <Route path="/signup">
-              <SignupForm />
-            </Route>
-          </Switch>
+          <div className="relative flex min-h-screen flex-col bg-slate-300 py-6">
+            <Switch>
+              <Route exact path="/">
+                <LandingPage allPosts={allPosts} updateAllPosts={updateAllPosts} allTags={allTags}/>
+              </Route>
+              <Route path="/posts/:id">
+                <Post updateAllPosts={updateAllPosts} allTags={allTags} />
+              </Route>
+              <Route path="/profile">
+                  <ProfilePage />
+              </Route>
+              <Route path="/characters/:id">
+                <Character />
+              </Route>
+              <Route path="/characters">
+                <CharacterPage />
+              </Route>
+              <Route path="/login">
+                  <LoginPage />
+              </Route>
+              <Route path="/signup">
+                <SignupPage />
+              </Route>
+            </Switch>
+          </div>
         </div>
       </BrowserRouter>   
   );
