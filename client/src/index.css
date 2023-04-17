@@ -18,13 +18,53 @@ code {
 
 @layer base {
   h1 {
-    @apply text-2xl
+    @apply flex justify-center text-5xl font-semibold;
   }
+
+  p {
+    @apply text-base p-2;
+  }
+
+  button {
+    @apply rounded-lg border w-20 m-2 transition hover:opacity-70 shadow-md;
+  }
+
+  input {
+    @apply outline-none text-slate-500 p-1 m-1 border border-slate-300 rounded;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    @apply placeholder:italic
+  }
+
+  label {
+    @apply text-white px-4 text-sm;
+  }
+
+  .h1-welcome {
+    @apply m-5 py-2 underline decoration-rose-500;
+  }
+
+  .div-welcome {
+    @apply relative flex place-self-center flex-col border-2 w-96 bg-indigo-600 rounded-lg shadow shadow-rose-400 mt-10
+  }
+
+  .about-info {
+    @apply text-cyan-100 p-2 min-h-fit;
+  }
+
+  .login-welcome {
+    @apply min-h-fit;
+  }
+
+  .btn-confirm {
+    @apply bg-cyan-500 text-white border-cyan-300 shadow-rose-400;
+  }
+
+  .btn-cancel {
+    @apply bg-rose-400 shadow-cyan-300;
+  }
+
 
 }
-
-/* @layer base {
-  html {
-    @apply bg-slate-600 text-white text-lg font-bold;
-  }
-} */

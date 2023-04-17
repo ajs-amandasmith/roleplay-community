@@ -4,7 +4,6 @@ import { Redirect } from "react-router-dom";
 
 function LoginForm() {
   const dispatch = useDispatch();
-  // const user = useSelector(state => state);
   const [toHome, setToHome] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -45,26 +44,27 @@ function LoginForm() {
   // displayed form
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+      <form onSubmit={handleSubmit} className="form-login">
+        <label htmlFor="login-username">Username:</label>
         <input
-          className="border"
           type="text"
-          id="username"
+          placeholder="Username"
+          id="login-username"
           value={username}
           onChange={e => setUsername(e.target.value)}
         />
         <br></br>
-        <label htmlFor="password">Password</label>
+        <label htmlFor="login-password">Password:</label>
         <input
-          className="border"
+          className="m-2"
           type="password"
-          id="password"
+          placeholder="Password"
+          id="login-password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
         <br></br>
-        <button type="submit" className="border-slate-400 bg-slate-200">
+        <button type="submit" className="btn-confirm">
           {isLoading ? "Loading..." : "Login"}
         </button>
         <br></br>
