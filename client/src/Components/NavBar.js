@@ -26,13 +26,57 @@ function NavBar() {
   }
 
   return (
-    <div className="bg-sky-600">
-      <NavLink to="/" className=" text-white p-1">Home</NavLink>
-      {user.errors || Object.keys(user).length === 0  ? null : <NavLink to="/profile" className=" text-white p-1">Profile</NavLink>}
-      {user.errors || Object.keys(user).length === 0 ? null : <NavLink to="/characters" className=" text-white p-1">Characters</NavLink>}
-      {user.errors || Object.keys(user).length === 0 ? <NavLink to="/login" className=" text-white p-1">Login</NavLink> : null}
-      {user.errors || Object.keys(user).length === 0 ? null : <NavLink to="/" className=" text-white p-1" onClick={handleLogout}>Logout</NavLink>}
-      {user.errors || Object.keys(user).length === 0 ? <NavLink to="/signup" className=" text-white p-1">Signup</NavLink> : null}
+    <div className="flex bg-sky-600">
+      <div className=" text-white p-1">
+        <NavLink to="/" >
+          Home
+        </NavLink>
+      </div>
+      <div className=" text-white p-1">
+        {
+          user.errors || Object.keys(user).length === 0  ? 
+            null : 
+            <NavLink to="/profile">
+              Profile
+            </NavLink>
+        }
+      </div>
+      <div className=" text-white p-1">
+        {
+          user.errors || Object.keys(user).length === 0 ? 
+            null : 
+            <NavLink to="/characters">
+              Characters
+            </NavLink>
+        }
+      </div>
+      <div className=" text-white p-1">
+        {
+          user.errors || Object.keys(user).length === 0 ? 
+            <NavLink to="/login">
+              Login
+            </NavLink> :
+            null
+        } 
+      </div>
+      <div className=" text-white p-1">
+        {
+          user.errors || Object.keys(user).length === 0 ? 
+            null : 
+            <NavLink to="/" onClick={handleLogout}>
+              Logout
+            </NavLink>
+        }
+      </div>
+      <div className="flex justify-end text-white p-1">
+        {
+          user.errors || Object.keys(user).length === 0 ? 
+            <NavLink to="/signup">
+              Signup
+            </NavLink> : 
+            null
+        }
+      </div>
     </div>
   )
 }

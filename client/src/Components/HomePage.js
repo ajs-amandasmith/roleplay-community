@@ -5,9 +5,10 @@ import AddPostForm from "./AddPostForm";
 function HomePage({ allPosts, updateAllPosts, allTags }) {
 
   const displayPosts = allPosts.map(post => (
-    <div key={post.id}>
+    <div key={post.id} style={{ width: '200px'}}>
       <Link to={`/posts/${post.id}`}><h4 className="text-2xl">{post.title}</h4></Link>
       <p>By: {post.character.name}</p>
+      <p className="truncate">{post.post}</p>
       <p>Comments: {post.comments.length}</p>
       <br></br>
     </div>

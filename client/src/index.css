@@ -16,6 +16,13 @@ code {
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  h1 {
+    @apply text-2xl
+  }
+
+}
+
 /* @layer base {
   html {
     @apply bg-slate-600 text-white text-lg font-bold;

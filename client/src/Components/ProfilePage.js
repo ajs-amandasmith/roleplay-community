@@ -11,7 +11,8 @@ function ProfilePage() {
   const [addAvatar, setAddAvatar] = useState(false);
 
   const displayCharacters = characters.map(character => (
-    <div key={character.id}>
+    <div key={character.id} className="p-6 rounded-lg bg-sky-500">
+      <img className="h=[100px] w-[100px] object-cover" src={typeof character.avatar === "string" ? character.avatar : blank_avatar}/>
       <p>{character.name}</p>
     </div>
   ))
@@ -32,7 +33,9 @@ function ProfilePage() {
           <button className="border" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
         }
         {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
-        {displayCharacters}
+        <div className="grid grid-cols-3 gap-2">
+          {displayCharacters}
+        </div>
       </div>
     }
     </div>

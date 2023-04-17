@@ -38,8 +38,6 @@ function Post({ updateAllPosts, allTags }) {
       })
   }, [id])
 
-  console.log(tags)
-
   useEffect(() => {
     updateTags();
   // eslint-disable-next-line  
@@ -81,7 +79,7 @@ function Post({ updateAllPosts, allTags }) {
 
   const displayTags = tags.map(tag => (
     <div key={tag.id}>
-      <p>{tag.tag.replace(/-/g, ' ')}</p>
+      <p className="capitalize">{tag.tag.replace(/-/g, ' ')}</p>
     </div>
   ))
 
