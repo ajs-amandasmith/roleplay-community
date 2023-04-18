@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCharacter } from "../reducer/characters.js"
 
-function AddCharacterForm() {
+function AddCharacterForm({ setAddCharacter}) {
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
   // const [errors, setErrors] = useState([]);
@@ -24,6 +24,7 @@ function AddCharacterForm() {
       if (r.ok) {
         r.json().then(character => {
           dispatch(addCharacter(character))
+          setAddCharacter(false);
         })
       } else {
         r.json().then(err => console.log(err.errors))
@@ -32,7 +33,7 @@ function AddCharacterForm() {
   }
 
   return (
-    <div>
+    <div className="div-welcome w-1/2">
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name: </label>
         <input 
