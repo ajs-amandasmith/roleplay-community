@@ -33,7 +33,7 @@ function AddCharacterAvatarForm({ character, updateCharacter }) {
       <form onSubmit={handleSubmit}>
         <label htmlFor="char-avatar">Update Avatar: </label>
         <input id="char-avatar" type="file" accept="image" className="border" onChange={e => setCharAvatar(e.target.files[0])}></input>
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit Image</button>
+        <button type="submit" className="btn-confirm">Submit Image</button>
       </form>
       {error === "Internal Server Error" ? <p className="text-red-600">No file attached</p> : null }
     </div>

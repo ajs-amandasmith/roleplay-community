@@ -31,11 +31,13 @@ function AddAvatarForm({ addAvatar, setAddAvatar }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="avatar">Update Avatar</label>
-      <input id="avatar" type="file" accept="image" className="border" onChange={e => setAvatar(e.target.files[0])} ></input>
-      <button type="submit" className="border-slate-400 bg-slate-200">Submit Image</button>
-    </form>
+    <div className="div-welcome m-0">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="avatar">Update Avatar</label>
+        <input id="avatar" type="file" accept="image" className="border" onChange={e => setAvatar(e.target.files[0])} ></input>
+        <button type="submit" className="btn-confirm">Submit Image</button>
+      </form>
+    </div>
   )
 }
 
