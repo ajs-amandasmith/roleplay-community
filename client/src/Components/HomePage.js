@@ -1,25 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddPostForm from "./AddPostForm";
 
 function HomePage({ allPosts, updateAllPosts, allTags }) {
+  const [addPost, setAddPost] = useState(false);
+
+  console.log(allPosts)
 
   const displayPosts = allPosts.map(post => (
-    <div key={post.id} style={{ width: '200px'}}>
-      <Link to={`/posts/${post.id}`}><h4 className="text-2xl">{post.title}</h4></Link>
-      <p>By: {post.character.name}</p>
-      <p className="truncate">{post.post}</p>
-      <p>Comments: {post.comments.length}</p>
-      <br></br>
+    <div 
+      key={post.id} 
+      className="post-list-item"
+    >
+      <Link to={`/posts/${post.id}`}>
+        <div className="bg-indigo-500 m-2 border-2 border-indigo-400 hover:opacity-70 transition shadow">
+          <h3 className="post-list-title">{post.title}</h3>
+        </div>
+      </Link>
+      <div className="post-list-post">
+        <p className="truncate">{post.post}</p>
+      </div>
+      <div className="post-list-info">
+        <p className="post-character">By: {post.character.name}</p>
+        <p className="post-user">User: {post.user.username}</p>
+        <p className="post-comments">Comments: {post.comments.length}</p>
+      </div>
     </div>
   ))
 
   return (
     <div>
-      <h2 className="text-3xl">Available Posts</h2>
-      <AddPostForm updateAllPosts={updateAllPosts} allTags={allTags} />
-      <br></br>
-      {displayPosts}
+      <h2>Available Posts</h2>
+      {addPost ? <AddPostForm updateAllPosts={updateAllPosts} allTags={allTags} /> : null}
+      {addPost ? 
+        <button 
+          className="btn-cancel" 
+          onClick={
+            e => setAddPost(false)
+          }>Cancel
+        </button> : 
+        <button 
+          className="btn-confirm" 
+          onClick={
+            e => setAddPost(true)
+          }>Create a Post?
+        </button>}
+      <div className="post-list">
+        {displayPosts}
+      </div>
     </div>
   )
 }
