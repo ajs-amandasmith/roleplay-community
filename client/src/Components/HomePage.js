@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddPostForm from "./AddPostForm";
+import Search from "./Search";
 
 function HomePage({ allPosts, updateAllPosts, allTags }) {
   const [addPost, setAddPost] = useState(false);
+  const [doSearch, setDoSearch] = useState(false);
+  const [searchTag, setSearchTag] = useState("");
 
-  console.log(allPosts)
+  const posts = allPosts.map(post => {
+    if (setSearchTag === "") {
+      return post;
+    } else {
+      return {...post, tags: post.tags.filter(tag => (tag.tag.includes(searchTag.replace(/ /g, '-').toLowerCase())))}
+    }
+  }).filter(post => post.tags.length > 0)
 
-  const displayPosts = allPosts.map(post => (
+
+  const displayPosts = posts.map(post => (
     <div 
       key={post.id} 
       className="post-list-item"
@@ -31,6 +41,7 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
   return (
     <>
       <h2>Available Posts</h2>
+      {doSearch ? <Search setDoSearch={setDoSearch} allPosts={allPosts} allTags={allTags} setSearchTag={setSearchTag} /> : null}
       {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} /> : null}
       {addPost ? 
         <button 
@@ -45,6 +56,14 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
             e => setAddPost(true)
           }>Create a Post?
         </button>}
+        {
+        doSearch ? 
+          <button className="btn-cancel place-self-center" onClick={e => {
+            setDoSearch(false)
+            setSearchTag("")
+          }}>Cancel</button> : 
+          <button className="btn-confirm place-self-center" onClick={e => setDoSearch(true)}>Search by Tag?</button>
+        }
       <div className="post-list">
         {displayPosts}
       </div>
