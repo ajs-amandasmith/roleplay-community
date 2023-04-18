@@ -4,7 +4,6 @@ import AddAvatarForm from "./AddAvatarForm";
 import blank_avatar from '../images/blank_avatar.png';
 
 function ProfilePage() {
-  const state = useSelector(state => state)
   const user = useSelector(state => state.user.user);
   const status = useSelector(state => state.user.status);
   const characters = useSelector(state => state.characters);
@@ -12,7 +11,7 @@ function ProfilePage() {
 
   const displayCharacters = characters.map(character => (
     <div key={character.id} className="p-6 rounded-lg bg-sky-500">
-      <img className="h=[100px] w-[100px] object-cover" src={typeof character.avatar === "string" ? character.avatar : blank_avatar}/>
+      <img className="h=[100px] w-[100px] object-cover" alt="character" src={typeof character.avatar === "string" ? character.avatar : blank_avatar}/>
       <p>{character.name}</p>
     </div>
   ))

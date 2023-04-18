@@ -7,7 +7,7 @@ import DeleteCharacter from "./DeleteCharacter";
 
 function Character() {
   const { id } = useParams();
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [character, setCharacter] = useState({});
 
   useEffect(() => {
@@ -16,9 +16,10 @@ function Character() {
         if (r.ok) {
           r.json().then(character => setCharacter(character))
         } else {
-          r.json().then(err => setErrors(err))
+          r.json().then(err => console.log(err))
         }
       })
+  // eslint-disable-next-line 
   }, [])
 
   function updateCharacter(character) {

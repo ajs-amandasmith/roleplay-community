@@ -6,7 +6,6 @@ import blank_avatar from '../images/blank_avatar.png';
 import AddCharacterAvatarForm from "./AddCharacterAvatarForm";
 
 function CharacterPage() {
-  const user = useSelector(state => state.user)
   const status = useSelector(state => state.status)
   const characters = useSelector(state => state.characters)
 

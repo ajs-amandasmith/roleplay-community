@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function AddCharacterAvatarForm({ character, updateCharacter }) {
   const [charAvatar, setCharAvatar] = useState("");
   const [error, setError] = useState("");
-  const user = useSelector(state => state);
   const dispatch = useDispatch();
   
  

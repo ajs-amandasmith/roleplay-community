@@ -5,12 +5,12 @@ import { addCharacter } from "../reducer/characters.js"
 function AddCharacterForm() {
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
-    setErrors([]);
+    // setErrors([]);
     fetch("/characters", {
       method: "POST",
       headers: {
@@ -26,7 +26,7 @@ function AddCharacterForm() {
           dispatch(addCharacter(character))
         })
       } else {
-        r.json().then(err => setErrors(err.errors))
+        r.json().then(err => console.log(err.errors))
       }
     })
   }

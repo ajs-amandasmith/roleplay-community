@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function UpdatePostForm({ currentPost, updatePost, title, setTitle }) {
   const [postContent, setPostContent] = useState(currentPost.post);
