@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function AddPostForm({ updateAllPosts, allTags }) {
+function AddPostForm({ updateAllPosts, setAddPost }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
@@ -31,6 +31,7 @@ function AddPostForm({ updateAllPosts, allTags }) {
           r.json().then(post => {
             dispatch({ type: "posts/add", payload: post })
             updateAllPosts(post, "add");
+            setAddPost(false);
           })
         } else {
           r.json().then(err => setErrors(err.errors))
@@ -39,32 +40,38 @@ function AddPostForm({ updateAllPosts, allTags }) {
   }
 
   return (
-    <div>
+    <div className="div-welcome">
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title: </label>
         <input 
-          className="border"
           type="text"
+          placeholder="Title"
           id="title"
           value={title}
           onChange={e => setTitle(e.target.value)}
         />
         <br></br>
         <label htmlFor="characters">Select a Character: </label>
-        <select id="characters" name="characters" onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))} defaultValue="Select Your Character">
+        <select 
+          id="characters" 
+          name="characters" 
+          className="my-2"
+          onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))} 
+          defaultValue="Select Your Character"
+        >
           <option disabled="disabled">Select Your Character</option>
           {characterOptions}
         </select>
         <br></br>
         <label htmlFor="post">Post: </label>
         <textarea
-          className="border"
           id="post"
+          placeholder="Post..."
           value={post}
           onChange={e => setPost(e.target.value)}
         />
         <br></br>
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
+        <button type="submit" className="btn-confirm">Submit</button>
       </form>
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>

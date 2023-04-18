@@ -29,18 +29,18 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
   ))
 
   return (
-    <div>
+    <>
       <h2>Available Posts</h2>
-      {addPost ? <AddPostForm updateAllPosts={updateAllPosts} allTags={allTags} /> : null}
+      {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} /> : null}
       {addPost ? 
         <button 
-          className="btn-cancel" 
+          className="btn-cancel place-self-center" 
           onClick={
             e => setAddPost(false)
           }>Cancel
         </button> : 
         <button 
-          className="btn-confirm" 
+          className="btn-confirm place-self-center" 
           onClick={
             e => setAddPost(true)
           }>Create a Post?
@@ -48,7 +48,7 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
       <div className="post-list">
         {displayPosts}
       </div>
-    </div>
+    </>
   )
 }
 
