@@ -29,12 +29,16 @@ code {
     @apply flex text-2xl font-semibold;
   }
 
+  h4 {
+    @apply flex text-xl font-semibold;
+  }
+
   p {
     @apply text-base p-2;
   }
 
   button {
-    @apply rounded-lg border w-20 m-2 transition hover:opacity-70 shadow-md;
+    @apply rounded-lg border w-32 m-2 transition hover:opacity-70 shadow-md;
   }
 
   input,
@@ -46,6 +50,10 @@ code {
   input[type="password"],
   textarea {
     @apply placeholder:italic
+  }
+
+  input[type="file"] {
+    @apply bg-indigo-400;
   }
 
   label {
@@ -88,15 +96,15 @@ code {
     @apply m-2 p-2 shadow;
   }
 
-  .post-character {
+  .post-list-character {
     @apply text-sm p-0 pl-2;
   }
 
-  .post-user {
+  .post-list-user {
     @apply text-xs p-0 pl-2;
   }
 
-  .post-comments {
+  .post-list-comments {
     @apply text-xs p-0 pl-2;
   }
 
@@ -106,5 +114,21 @@ code {
 
   .post-list-info {
     @apply m-2 border-2 border-indigo-800 shadow rounded;
+  }
+
+  .div-post {
+    @apply relative flex place-self-center flex-col border-2 w-1/2 bg-indigo-600 rounded-lg shadow shadow-rose-400 mt-10
+  }
+
+  .post-author {
+    @apply text-white inline-block m-2;
+  }
+
+  .post-user {
+    @apply text-white inline-block m-2;
+  }
+
+  .post-post {
+    @apply text-white m-2 break-words ;
   }
 }

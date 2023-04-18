@@ -17,13 +17,13 @@ function DeletePost({ currentPost, updateAllPosts }) {
   }
 
   if (isDeleted) {
-    return <Redirect to="/profile" />
+    return <Redirect to="/" />
   }
 
   return (
-    <div>
-      <button className="border-slate-400 bg-slate-200" onClick={handleDelete}>Delete Post?</button>
-    </div>
+    <>
+      <button className="btn-cancel place-self-center mt-10" onClick={handleDelete}>Delete Post?</button>
+    </>
   )
 }
 

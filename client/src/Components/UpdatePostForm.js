@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function UpdatePostForm({ currentPost, updatePost, title, setTitle }) {
+function UpdatePostForm({ currentPost, updatePost, title, setTitle, setEditPost }) {
   const [postContent, setPostContent] = useState(currentPost.post);
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function UpdatePostForm({ currentPost, updatePost, title, setTitle }) {
           r.json().then(post => {
             dispatch({ type: "posts/update", payload: post})
             updatePost(post);
+            setEditPost(false);
           })
         } else {
           r.json().then(err => setErrors(err.errors))
@@ -31,7 +32,7 @@ function UpdatePostForm({ currentPost, updatePost, title, setTitle }) {
   }
   
   return (
-    <div>
+    <div className="div-welcome w-1/2">
       <form onSubmit={handleSubmit}>
         <label htmlFor="update-title">Update Title: </label>
         <input 
@@ -49,7 +50,8 @@ function UpdatePostForm({ currentPost, updatePost, title, setTitle }) {
           value={postContent}
           onChange={e => setPostContent(e.target.value)}
         />
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
+        <br></br>
+        <button type="submit" className="btn-confirm">Submit</button>
       </form>
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>

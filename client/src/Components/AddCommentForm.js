@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function AddCommentForm({ currentPost, updateComments, updatePost }) {
+function AddCommentForm({ currentPost, updateComments, setAddComment }) {
   const [errors, setErrors] = useState([]);
   const [comment, setComment] = useState("");
   const [characterId, setCharacterId] = useState("");
@@ -32,6 +32,7 @@ function AddCommentForm({ currentPost, updateComments, updatePost }) {
         r.json().then(comment => {
           updateComments(comment)
           dispatch({ type: "posts/update", payload: currentPost })
+          setAddComment(false);
         })
       } else {
         r.json().then(err => setErrors(err.errors))
@@ -40,12 +41,12 @@ function AddCommentForm({ currentPost, updateComments, updatePost }) {
   }
 
   return (
-    <div>
+    <div className="div-welcome w-1/2">
       <form onSubmit={handleSubmit}>
         <label htmlFor="comment">Comment: </label>
         <input 
-          className="border"
           type="text"
+          placeholder="Comment"
           id="comment"
           value={comment}
           onChange={e => setComment(e.target.value)}
@@ -57,7 +58,7 @@ function AddCommentForm({ currentPost, updateComments, updatePost }) {
           {characterOptions}
         </select>
         <br></br>
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
+        <button type="submit" className="btn-confirm">Submit</button>
       </form>
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>

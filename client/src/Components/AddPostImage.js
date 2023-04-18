@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-function AddPostImage({ currentPost, updatePost }) {
+function AddPostImage({ currentPost, updatePost, setEditPost }) {
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const [postImage, setPostImage] = useState("");
@@ -20,6 +20,7 @@ function AddPostImage({ currentPost, updatePost }) {
           r.json().then(post => {
             dispatch({ type: "posts/image/add", payload: post});
             updatePost(post);
+            setEditPost(false);
           })
         } else {
           r.json().then(err => setError(err.error))
@@ -28,11 +29,11 @@ function AddPostImage({ currentPost, updatePost }) {
   }
 
   return (
-    <div>
+    <div className="div-welcome w-1/2">
       <form onSubmit={handleSubmit}>
       <label htmlFor="post-image">Update Image: </label>
         <input id="post-image" type="file" accept="image" className="border" onChange={e => setPostImage(e.target.files[0])}></input>
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit Image</button>
+        <button type="submit" className="btn-confirm">Submit Image</button>
       </form>
       {error === "Internal Server Error" ? <p className="text-red-600">No file attached</p> : null }
     </div>

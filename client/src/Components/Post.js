@@ -18,6 +18,8 @@ function Post({ updateAllPosts, allTags }) {
   const [tags, setTags] = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
   const user = useSelector(state => state.user.user)
+  const [editPost, setEditPost] = useState(false);
+  const [addComment, setAddComment] = useState(false);
 
   useEffect(() => {
     setErrors([]);
@@ -70,55 +72,90 @@ function Post({ updateAllPosts, allTags }) {
   }
 
   const displayComments = comments.map(comment => (
-    <div key={comment.id}>
-      <p>{comment.comment}</p>
-      <h5>{comment.user.username}</h5>
-      <h5>{comment.character.name}</h5>
+    <div key={comment.id} className="post-list-item">
+      <p className="post-list-post">{comment.comment}</p>
+      <p className="post-list-character">By: {comment.character.name}</p>
+      <p className="post-list-user">User: {comment.user.username}</p>
     </div>
   ))
 
   const displayTags = tags.map(tag => (
     <div key={tag.id}>
-      <p className="capitalize">{tag.tag.replace(/-/g, ' ')}</p>
+      <p className="capitalize text-xs text-white">{tag.tag.replace(/-/g, ' ')}</p>
     </div>
   ))
 
   return (
-    <div>
+    <>
+    <h1>{title}</h1>
+    <h3 className="justify-center">By: {character.name}</h3>
+    <h4 className="justify-center">User: {postUser.username}</h4>
+    <div className="relative flex flex-row justify-center">
       {
-        user.id === postUser.id ? 
-        <AddPostImage currentPost={currentPost} updatePost={updatePost} /> 
-        : null
+        user.id === postUser.id && !editPost ?
+          <button className="btn-confirm place-self-center mt-10" onClick={e => (setEditPost(true))}>Edit Post?</button> :
+          null  
       }
       {
-        user.id === postUser.id ?
-        <AddTagForm currentPost={currentPost} updatePostTags={updatePostTags} availableTags={availableTags} />
-        : null
-      }
-      {
-        user.id === postUser.id ? 
-        <UpdatePostForm currentPost={currentPost} updatePost={updatePost} title={title} setTitle={setTitle} character={character} setCharacter={setCharacter} /> 
-        : null
+        user.id === postUser.id && editPost ?
+          <button className="btn-cancel place-self-center mt-10" onClick={e => (setEditPost(false))}>Cancel Edit</button> :
+          null  
       }
       {
         user.id === postUser.id ?
         <DeletePost currentPost={currentPost} updateAllPosts={updateAllPosts} />
         : null
       }
-      <div>
-        <img className="h=[100px] w-[100px] object-cover" src={currentPost.image} alt='post' />
-        <h1 className="text-3xl">{title}</h1>
-        <h3 className="text-2xl">{character.name}</h3>
-        <h4>{postUser.username}</h4>
-        <p>{currentPost.post}</p>
-        {displayComments}
-        {displayTags}
-      </div>
+    </div>
+    <div className="flex flex-row relative justify-center bg-indigo-500 rounded w-1/2 place-self-center">
+      <p className="flex absolute left-0 text-white">Tags:</p>
+      {displayTags}
+    </div>
+    <div className="div-post mt-0">
+      {currentPost.image ? <img className="h=[500px] w-[500px] place-self-center object-cover" src={currentPost.image} alt='post' /> : null}
+      <div className="bg-indigo-500 m-2">
+        <p className="post-post">{currentPost.post}</p>
+      </div>        
+    </div>
+    {
+      addComment ? 
+        <button className="btn-cancel place-self-center" onClick={e => setAddComment(false)}>Cancel Comment</button>: 
+        <button className="btn-confirm place-self-center" onClick={e => setAddComment(true)}>Add a Comment?</button>
+    }
+      {addComment ? <AddCommentForm currentPost={currentPost} updateComments={updateComments} updatePost={updatePost} setAddComment={setAddComment} /> : null }
+    {
+      editPost ? <AddPostImage currentPost={currentPost} updatePost={updatePost} setEditPost={setEditPost} /> : null
+    }
+    {
+      editPost ?
+      <AddTagForm currentPost={currentPost} updatePostTags={updatePostTags} availableTags={availableTags} setEditPost={setEditPost} />
+      : null
+    }
+    {
+      editPost ? 
+      <UpdatePostForm currentPost={currentPost} updatePost={updatePost} title={title} setTitle={setTitle}character={character} setCharacter={setCharacter} setEditPost={setEditPost} /> 
+      : null
+    }
+    <div className="post-list">
+      {displayComments}
+    </div>
+    
+    
+    
+        
+
+       
+      
+      {/*
+      
+      
+     
+   
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>
         ))}
-      <AddCommentForm currentPost={currentPost} updateComments={updateComments} updatePost={updatePost} />
-    </div>
+      */}
+    </>
   )
 }
 

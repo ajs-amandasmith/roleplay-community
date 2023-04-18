@@ -21,9 +21,9 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
         <p className="truncate">{post.post}</p>
       </div>
       <div className="post-list-info">
-        <p className="post-character">By: {post.character.name}</p>
-        <p className="post-user">User: {post.user.username}</p>
-        <p className="post-comments">Comments: {post.comments.length}</p>
+        <p className="post-list-character">By: {post.character.name}</p>
+        <p className="post-list-user">User: {post.user.username}</p>
+        <p className="post-list-comments">Comments: {post.comments.length}</p>
       </div>
     </div>
   ))
