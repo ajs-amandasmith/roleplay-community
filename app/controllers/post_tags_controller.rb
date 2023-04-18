@@ -1,6 +1,10 @@
 class PostTagsController < ApplicationController
   # skip_before_action :authorize
 
+  def index
+    render json: PostTag.all
+  end
+
   def create
     postTag = PostTag.create!(post_tag_params)
     render json: postTag, status: :created

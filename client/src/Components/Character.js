@@ -9,6 +9,7 @@ function Character() {
   const { id } = useParams();
   // const [errors, setErrors] = useState([]);
   const [character, setCharacter] = useState({});
+  const [editCharacter, setEditCharacter] = useState(false);
 
   useEffect(() => {
     fetch(`/characters/${id}`)
@@ -27,11 +28,22 @@ function Character() {
   }
 
   return (
-    <div>
-      <h1>{character.name}</h1>
-      <img className="h=[100px] w-[100px] object-cover" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
-      <AddCharacterAvatarForm character={character} updateCharacter={updateCharacter} />
-      <UpdateCharacterForm character={character} updateCharacter={updateCharacter} />
+    <div className="div-welcome">
+      <h1 className="text-white p-2">{character.name}</h1>
+      <img className="h=[100px] w-[100px] object-cover m-2" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
+      <p className="post-post">About: {character.about}</p>
+      {editCharacter ? 
+        <button className="btn-cancel" onClick={e => setEditCharacter(false)}>Cancel</button> : 
+        <button className="btn-confirm" onClick={e => setEditCharacter(true)}>Edit Character?</button>
+      }
+      {editCharacter ? 
+        <AddCharacterAvatarForm character={character} updateCharacter={updateCharacter} setEditCharacter={setEditCharacter} /> : 
+        null
+      }
+      {editCharacter ? 
+        <UpdateCharacterForm character={character} updateCharacter={updateCharacter} setEditCharacter={setEditCharacter} /> : 
+        null
+      }
       <DeleteCharacter character={character} />
     </div>
   )

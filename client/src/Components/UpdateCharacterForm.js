@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function UpdateCharacterForm({ character, updateCharacter }) {
-  const [name, setName] = useState("");
-  const [about, setAbout] = useState("");
+function UpdateCharacterForm({ character, updateCharacter, setEditCharacter }) {
+  const [name, setName] = useState(character.name);
+  const [about, setAbout] = useState(character.about);
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
 
@@ -24,6 +24,7 @@ function UpdateCharacterForm({ character, updateCharacter }) {
           r.json().then(character => {
             dispatch({ type: "characters/update", payload: character})
             updateCharacter(character);
+            setEditCharacter(false);
           })
         } else {
           r.json().then(err => setErrors(err.errors))
@@ -35,12 +36,12 @@ function UpdateCharacterForm({ character, updateCharacter }) {
     <div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Update Name: </label>
-        <input id="name" type="text" className="border" onChange={e => setName(e.target.value)} />
+        <input id="name" type="text" value={name} placeholder="Name" onChange={e => setName(e.target.value)} />
         <br></br>
         <label htmlFor="about">Update About Info: </label>
-        <textarea id="name" className="border" onChange={e => setAbout(e.target.value)} />
+        <textarea id="name" value={about} placeholder="About" onChange={e => setAbout(e.target.value)} />
         <br></br>
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
+        <button type="submit" className="btn-confirm">Submit</button>
       </form>
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>

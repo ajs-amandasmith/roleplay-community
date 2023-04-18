@@ -21,7 +21,7 @@ function DeleteCharacter({ character }) {
 
   return (
     <div>
-      <button className="border-slate-400 bg-slate-200" onClick={handleDelete}>Delete Character?</button>
+      <button className="btn-cancel" onClick={handleDelete}>Delete Character?</button>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-function AddCharacterAvatarForm({ character, updateCharacter }) {
+function AddCharacterAvatarForm({ character, updateCharacter, setEditCharacter }) {
   const [charAvatar, setCharAvatar] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -21,6 +21,7 @@ function AddCharacterAvatarForm({ character, updateCharacter }) {
           r.json().then(data => {
             dispatch({ type: "characters/avatar/add", payload: data});
             updateCharacter(data);
+            setEditCharacter(false);
           })
         } else {
           r.json().then(err => setError(err.error))
