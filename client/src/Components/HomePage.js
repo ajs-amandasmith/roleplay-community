@@ -8,14 +8,20 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
   const [doSearch, setDoSearch] = useState(false);
   const [searchTag, setSearchTag] = useState("");
 
-  const posts = allPosts.map(post => {
-    if (setSearchTag === "") {
+  let posts = allPosts.map(post => {
+    if (searchTag === "") {
       return post;
     } else {
       return {...post, tags: post.tags.filter(tag => (tag.tag.includes(searchTag.replace(/ /g, '-').toLowerCase())))}
     }
-  }).filter(post => post.tags.length > 0)
-
+  }).filter(post => {
+    if (searchTag === "" ) {
+      return post;
+    } else {
+      return post.tags.length > 0
+    }
+   
+  })
 
   const displayPosts = posts.map(post => (
     <div 

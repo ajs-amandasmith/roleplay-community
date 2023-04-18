@@ -1,24 +1,24 @@
-# README
+This app uses:
+* Rails 7.0.4.2
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To seed Data:
+* Run rails db:seed
 
-Things you may want to cover:
+To reseed Data:
+* Run rails db:seed:replant
 
-* Ruby version
+To start the servers:
+* In one terminal, Run rails s
+* In a second terminal, Run npm start --prefix client
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Things you can do on the app:
+* Sign up/Login
+* Logout
+* View all posts
+* Create a character
+* Create a post as a character
+* Search posts by tags
+* Comment on a post as a character
+* Delete a post
+* Edit a post
+* Assign a tag to a post

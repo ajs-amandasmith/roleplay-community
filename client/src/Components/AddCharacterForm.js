@@ -52,7 +52,7 @@ function AddCharacterForm({ setAddCharacter}) {
           onChange={e => setAbout(e.target.value)}
         />
         <br></br>
-        <button type="submit" className="border-slate-400 bg-slate-200">Submit</button>
+        <button type="submit" className="btn-confirm">Submit</button>
       </form>
     </div>
   )

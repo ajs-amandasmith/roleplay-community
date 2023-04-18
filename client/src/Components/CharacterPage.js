@@ -14,6 +14,7 @@ function CharacterPage() {
     <div key={character.id} className="post-list-item">
       <Link to={`/characters/${character.id}`}><h3>{character.name}</h3></Link>
       <img className="h=[100px] w-[100px] object-cover" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
+      <p className="post-post">About: {character.about}</p>
       <AddCharacterAvatarForm character={character} />
     </div>
   ))
@@ -22,7 +23,7 @@ function CharacterPage() {
     <>
       {status === "loading" ? "Loading..." :
         <div className="flex flex-col">
-          <h1>Character Page</h1>
+          <h1>My Characters</h1>
           {addCharacter ? <button className="btn-cancel place-self-center" onClick={e => setAddCharacter(false)}>Cancel</button> : <button className="btn-confirm place-self-center" onClick={e => setAddCharacter(true)}>Add Character?</button>}
           {addCharacter ? <AddCharacterForm setAddCharacter={setAddCharacter} /> : null}
           <div className="post-list">
