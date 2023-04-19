@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../reducer/user";
+import { fetchAllCharacters } from "../reducer/allCharacters";
 import NavBar from "./NavBar";
 import ProfilePage from "./ProfilePage";
 import Character from "./Character";
@@ -20,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUser());
+    dispatch(fetchAllCharacters());
   // eslint-disable-next-line  
   }, [])
 
@@ -50,8 +52,6 @@ function App() {
         }
       })
   }, [])
-
-  console.log(allCharacters);
 
   function updateAllPosts(postUpdate, op) {
     let newPosts;
@@ -85,6 +85,17 @@ function App() {
       default:
     }
   }
+
+  function updateAllCharacters(characterUpdate, op) {
+    let newCharacters;
+    switch(op) {
+      case "add":
+        newCharacters = [...allCharacters, characterUpdate]
+        setAllCharacters(newCharacters);
+        break;
+      default:
+    }
+  }
   
   return (
       <BrowserRouter>
@@ -93,19 +104,19 @@ function App() {
           <div className="relative flex min-h-screen flex-col bg-slate-300 py-6">
             <Switch>
               <Route exact path="/">
-                <LandingPage allPosts={allPosts} updateAllPosts={updateAllPosts} allTags={allTags}/>
+                <LandingPage allPosts={allPosts} updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} allTags={allTags}/>
               </Route>
               <Route path="/posts/:id">
-                <Post updateAllPosts={updateAllPosts} allTags={allTags} />
+                <Post updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} allTags={allTags} />
               </Route>
               <Route path="/profile">
-                  <ProfilePage updateAllPosts={updateAllPosts} />
+                  <ProfilePage updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} />
               </Route>
               <Route path="/characters/:id">
-                <Character updateAllPosts={updateAllPosts} />
+                <Character updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} />
               </Route>
               <Route path="/characters">
-                <CharacterPage allCharacters={allCharacters} />
+                <CharacterPage allCharacters={allCharacters} updateAllCharacters={updateAllCharacters} />
               </Route>
               <Route path="/login">
                   <LoginPage />

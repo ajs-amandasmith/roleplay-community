@@ -5,9 +5,9 @@ import { useSelector } from "react-redux";
 import blank_avatar from '../images/blank_avatar.png';
 import AddCharacterAvatarForm from "./AddCharacterAvatarForm";
 
-function CharacterPage({ allCharacters }) {
+function CharacterPage() {
   const status = useSelector(state => state.status)
-  // const characters = useSelector(state => state.characters)
+  const allCharacters = useSelector(state => state.allCharacters)
   const [addCharacter, setAddCharacter] = useState(false);
 
   const displayCharacters = allCharacters.map(character => (
