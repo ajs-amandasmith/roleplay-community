@@ -27,13 +27,10 @@ export default function allCharactersReducer(state = initialState, action) {
     case "characters/all/get/loading":
       return []
 
-
-
-    case "characters/all/remove":
-      return {
-        ...state,
-        user: {}
-      }
+    case "characters/add":
+      return [
+        ...state, action.payload
+      ]
 
     case "characters/remove":
       return state.filter(character => character.id !== action.payload.id);
