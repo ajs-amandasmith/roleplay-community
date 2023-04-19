@@ -14,6 +14,7 @@ import LandingPage from "./LandingPage";
 function App() {
   const [allPosts, setAllPosts] = useState([]);
   const [allTags, setAllTags] = useState([]);
+  const [allCharacters, setAllCharacters] = useState([]);
   const dispatch = useDispatch();
   const [signedUp, setSignedUp] = useState(false);
 
@@ -40,6 +41,17 @@ function App() {
         }
       })
   }, [])
+
+  useEffect(() => {
+    fetch('/characters')
+      .then(r => {
+        if (r.ok) {
+          r.json().then(characters => setAllCharacters(characters))
+        }
+      })
+  }, [])
+
+  console.log(allCharacters);
 
   function updateAllPosts(postUpdate, op) {
     let newPosts;
@@ -93,7 +105,7 @@ function App() {
                 <Character updateAllPosts={updateAllPosts} />
               </Route>
               <Route path="/characters">
-                <CharacterPage />
+                <CharacterPage allCharacters={allCharacters} />
               </Route>
               <Route path="/login">
                   <LoginPage />
