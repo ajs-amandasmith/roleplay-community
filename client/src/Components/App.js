@@ -62,6 +62,14 @@ function App() {
         })
         setAllPosts(newPosts);
         break;
+      case "character-delete":
+        newPosts = allPosts.filter(post => {
+          return postUpdate.posts.every(char => {
+            return char.id !== post.id
+          })
+        })
+        setAllPosts(newPosts);
+        break;
       default:
     }
   }
@@ -82,7 +90,7 @@ function App() {
                   <ProfilePage updateAllPosts={updateAllPosts} />
               </Route>
               <Route path="/characters/:id">
-                <Character />
+                <Character updateAllPosts={updateAllPosts} />
               </Route>
               <Route path="/characters">
                 <CharacterPage />

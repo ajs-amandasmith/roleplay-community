@@ -18,6 +18,7 @@ function ProfilePage({ updateAllPosts }) {
 
   useEffect(() => {
     dispatch({ type: "done"})
+  // eslint-disable-next-line 
   }, [])
 
   const displayCharacters = characters.map(character => (

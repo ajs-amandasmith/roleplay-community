@@ -13,7 +13,7 @@ function Post({ updateAllPosts, allTags }) {
   const [title, setTitle] = useState("")
   const [character, setCharacter] = useState({});
   const [postUser, setPostUser] = useState({});
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [comments, setComments] = useState([]);
   const [tags, setTags] = useState([]);
   const [availableTags, setAvailableTags] = useState([]);
@@ -22,7 +22,7 @@ function Post({ updateAllPosts, allTags }) {
   const [addComment, setAddComment] = useState(false);
 
   useEffect(() => {
-    setErrors([]);
+    // setErrors([]);
     fetch(`/posts/${id}`)
       .then(r => {
         if (r.ok) {
@@ -35,7 +35,7 @@ function Post({ updateAllPosts, allTags }) {
             setTags(post.tags);
           });
         } else {
-          r.json().then(err => setErrors(err));
+          r.json().then(err => console.log(err));
         }
       })
   }, [id])

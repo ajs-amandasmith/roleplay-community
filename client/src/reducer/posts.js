@@ -27,6 +27,14 @@ export default function postsReducer(state = initialState, action) {
       if (action.payload.errors) return state;
       return action.payload.posts
 
+      case "characters/remove":
+        const payloadPosts = action.payload.posts
+        return state.filter(post => {
+          return payloadPosts.every(payload => {
+            return payload.id !== post.id
+          })
+        })
+
     default:
       return state;
   }

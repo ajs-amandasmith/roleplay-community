@@ -5,7 +5,7 @@ import AddCharacterAvatarForm from './AddCharacterAvatarForm';
 import UpdateCharacterForm from "./UpdateCharacterForm";
 import DeleteCharacter from "./DeleteCharacter";
 
-function Character() {
+function Character({ updateAllPosts }) {
   const { id } = useParams();
   // const [errors, setErrors] = useState([]);
   const [character, setCharacter] = useState({});
@@ -44,7 +44,7 @@ function Character() {
         <UpdateCharacterForm character={character} updateCharacter={updateCharacter} setEditCharacter={setEditCharacter} /> : 
         null
       }
-      <DeleteCharacter character={character} />
+      <DeleteCharacter character={character} updateAllPosts={updateAllPosts} />
     </div>
   )
 }

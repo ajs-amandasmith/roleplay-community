@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
-function DeleteCharacter({ character }) {
+function DeleteCharacter({ character, updateAllPosts }) {
   const dispatch = useDispatch();
   const [isDeleted, setIsDeleted] = useState(false);
 
@@ -13,6 +13,7 @@ function DeleteCharacter({ character }) {
     })
       dispatch({ type: "characters/remove", payload: character})
       setIsDeleted(true);
+      updateAllPosts(character, "character-delete")
   }
 
   if (isDeleted) {
