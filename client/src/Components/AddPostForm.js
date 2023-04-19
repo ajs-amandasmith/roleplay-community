@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function AddPostForm({ updateAllPosts, setAddPost }) {
+function AddPostForm({ updateAllPosts, setAddPost, setPostCreated }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
@@ -13,8 +13,6 @@ function AddPostForm({ updateAllPosts, setAddPost }) {
   const characterOptions = characters.map(character => (
     <option key={character.id} id={character.id}>{character.name}</option>
   ))
-
-  console.log(characters)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,6 +32,7 @@ function AddPostForm({ updateAllPosts, setAddPost }) {
             setAddPost(false);
             dispatch({ type: "posts/add", payload: post })
             updateAllPosts(post, "add");
+            setPostCreated(true);
           })
         } else {
           r.json().then(err => setErrors(err.errors))

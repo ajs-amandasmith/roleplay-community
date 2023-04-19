@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCharacter } from "../reducer/characters.js"
 
-function AddCharacterForm({ setAddCharacter}) {
+function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
   // const [errors, setErrors] = useState([]);
@@ -25,6 +25,7 @@ function AddCharacterForm({ setAddCharacter}) {
         r.json().then(character => {
           dispatch(addCharacter(character))
           setAddCharacter(false);
+          setCharacterCreated(true);
         })
       } else {
         r.json().then(err => console.log(err.errors))

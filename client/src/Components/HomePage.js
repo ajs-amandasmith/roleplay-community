@@ -11,6 +11,8 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
   const [searchTag, setSearchTag] = useState("");
   const characters = useSelector(state => state.characters);
   const [addCharacter, setAddCharacter] = useState(false);
+  const [characterCreated, setCharacterCreated] = useState(false);
+  const [postCreated, setPostCreated] = useState(false);
 
   let posts = allPosts.map(post => {
     if (searchTag === "") {
@@ -53,7 +55,7 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
       <h2>Available Posts</h2>
       {doSearch ? <Search setDoSearch={setDoSearch} allPosts={allPosts} allTags={allTags} setSearchTag={setSearchTag} /> : null}
 
-        {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} /> : null}
+        {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} setPostCreated={setPostCreated} /> : null}
         
         {addPost ? null : 
           <button 
@@ -62,12 +64,14 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
               e => {
                 setAddPost(true)
                 setAddCharacter(false)
+                setCharacterCreated(false)
+                setPostCreated(false)
               }
             }>Create a Post?</button>}
 
         {addCharacter ? 
           <>
-            <AddCharacterForm setAddCharacter={setAddCharacter} /> 
+            <AddCharacterForm setAddCharacter={setAddCharacter} setCharacterCreated={setCharacterCreated} /> 
             <button 
               className="btn-cancel place-self-center" 
               onClick={
@@ -90,13 +94,25 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
         {addPost && characters.length > 0 ?
           <button className="btn-cancel place-self-center" onClick={e => setAddPost(false)} >Cancel</button> : null}
 
+        {characterCreated ? <h2 className="text-rose-500">Your character has been created!</h2> : null}
+
+        {postCreated ? <h2 className="text-rose-500">Your post has been created!</h2> : null}
+
         {
         doSearch ? 
           <button className="btn-cancel place-self-center" onClick={e => {
             setDoSearch(false)
             setSearchTag("")
           }}>Cancel</button> : 
-          <button className="btn-confirm place-self-center" onClick={e => setDoSearch(true)}>Search by Category?</button>
+          <button 
+            className="btn-confirm place-self-center" 
+            onClick={
+              e => {
+                setDoSearch(true)
+                setCharacterCreated(false)
+                setPostCreated(false)
+              }
+          }>Search by Category?</button>
         }
       <div className="post-list">
         {displayPosts}
