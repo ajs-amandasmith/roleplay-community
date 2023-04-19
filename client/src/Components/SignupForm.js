@@ -10,8 +10,6 @@ function SignupForm({ setSignedUp }) {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const signedUp = useSelector(state => state.signedUp.signedUp)
-
-  console.log('s-u-f', signedUp)
   
   const dispatch = useDispatch();
 

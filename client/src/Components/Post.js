@@ -108,7 +108,7 @@ function Post({ updateAllPosts, allTags }) {
       }
     </div>
     <div className="flex flex-row relative justify-center bg-indigo-500 rounded w-1/2 place-self-center">
-      <p className="flex absolute left-0 text-white">Tags:</p>
+      <p className="flex absolute left-0 text-white">Categories:</p>
       {displayTags}
     </div>
     <div className="div-post mt-0">
@@ -138,19 +138,8 @@ function Post({ updateAllPosts, allTags }) {
     }
     <div className="post-list">
       {displayComments}
-    </div>
-    
-    
-    
-        
-
-       
-      
+    </div>      
       {/*
-      
-      
-     
-   
       {errors.map(err => (
           <p key={err} className="text-red-600">{err}</p>
         ))}

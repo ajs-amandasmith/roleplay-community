@@ -14,6 +14,8 @@ function AddPostForm({ updateAllPosts, setAddPost }) {
     <option key={character.id} id={character.id}>{character.name}</option>
   ))
 
+  console.log(characters)
+
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
@@ -29,9 +31,9 @@ function AddPostForm({ updateAllPosts, setAddPost }) {
       .then(r => {
         if (r.ok) {
           r.json().then(post => {
+            setAddPost(false);
             dispatch({ type: "posts/add", payload: post })
             updateAllPosts(post, "add");
-            setAddPost(false);
           })
         } else {
           r.json().then(err => setErrors(err.errors))
@@ -40,43 +42,48 @@ function AddPostForm({ updateAllPosts, setAddPost }) {
   }
 
   return (
-    <div className="div-welcome">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title: </label>
-        <input 
-          type="text"
-          placeholder="Title"
-          id="title"
-          value={title}
-          onChange={e => setTitle(e.target.value)}
-        />
-        <br></br>
-        <label htmlFor="characters">Select a Character: </label>
-        <select 
-          id="characters" 
-          name="characters" 
-          className="my-2"
-          onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))} 
-          defaultValue="Select Your Character"
-        >
-          <option disabled="disabled">Select Your Character</option>
-          {characterOptions}
-        </select>
-        <br></br>
-        <label htmlFor="post">Post: </label>
-        <textarea
-          id="post"
-          placeholder="Post..."
-          value={post}
-          onChange={e => setPost(e.target.value)}
-        />
-        <br></br>
-        <button type="submit" className="btn-confirm">Submit</button>
-      </form>
-      {errors.map(err => (
-          <p key={err} className="text-red-600">{err}</p>
-        ))}
-    </div>
+    <>
+    {characters.length === 0 ? <h2 className="text-rose-500">Please create a character</h2>:
+      <div className="div-welcome">
+        <h2 className="text-white mb-4">Create a Post</h2>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="title">Title: </label>
+          <input 
+            type="text"
+            placeholder="Title"
+            id="title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+          <br></br>
+          <label htmlFor="characters">Select a Character: </label>
+          <select 
+            id="characters" 
+            name="characters" 
+            className="my-2"
+            onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))} 
+            defaultValue="Select Your Character"
+          >
+            <option disabled="disabled">Select Your Character</option>
+            {characterOptions}
+          </select>
+          <br></br>
+          <label htmlFor="post">Post: </label>
+          <textarea
+            id="post"
+            placeholder="Post..."
+            value={post}
+            onChange={e => setPost(e.target.value)}
+          />
+          <br></br>
+          <button type="submit" className="btn-confirm">Submit</button>
+        </form>
+        {errors.map(err => (
+            <p key={err} className="text-red-600">{err}</p>
+          ))}
+      </div>
+    }
+    </>
   )
 }
 

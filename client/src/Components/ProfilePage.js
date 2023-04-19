@@ -3,14 +3,18 @@ import { useSelector, useDispatch } from "react-redux";
 import AddAvatarForm from "./AddAvatarForm";
 import { Link } from "react-router-dom";
 import blank_avatar from '../images/blank_avatar.png';
+import AddCharacterForm from "./AddCharacterForm";
+import AddPostForm from "./AddPostForm";
 
-function ProfilePage() {
+function ProfilePage({ updateAllPosts }) {
   const user = useSelector(state => state.user.user);
   const status = useSelector(state => state.user.status);
   const characters = useSelector(state => state.characters);
   const posts = useSelector(state => state.posts);
   const [addAvatar, setAddAvatar] = useState(false);
   const dispatch = useDispatch();
+  const [addCharacter, setAddCharacter] = useState(false);
+  const [addPost, setAddPost] = useState(false);
 
   useEffect(() => {
     dispatch({ type: "done"})
@@ -51,31 +55,45 @@ function ProfilePage() {
   }
 
   return (
-    <div>
+    <>
       {status === "loading" ? "Loading..." :
-      <div>
-        <h1 className="mt-1 text-5xl font-medium leading-tight">Welcome, {user.username}!</h1>
+      <>
+        <h1>Welcome, {user.username}!</h1>
         <h2 className="mt-1 text-4xl">You can update your profile settings here!</h2>
-        <img className="h=[100px] w-[100px] object-cover" src={typeof user.avatar === "string" ? user.avatar : blank_avatar} alt='user profile' />
+        <img className="h=[100px] w-[100px] object-cover place-self-center" src={typeof user.avatar === "string" ? user.avatar : blank_avatar} alt='user profile' />
         {addAvatar ? 
-          <button className="btn-cancel" onClick={handleAddAvatar}>Cancel</button> :
-          <button className="btn-confirm" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
+          <button className="btn-cancel place-self-center" onClick={handleAddAvatar}>Cancel</button> :
+          <button className="btn-confirm place-self-center" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
         }
         {addAvatar ? <AddAvatarForm addAvatar={addAvatar} setAddAvatar={setAddAvatar} /> : null}
         <div className="grid grid-cols-2">
+          
           <div className="post-list">
+            {addCharacter ? <AddCharacterForm setAddCharacter={setAddCharacter} /> : null }
+            {
+              addCharacter ? 
+                <button className="btn-cancel" onClick={e => setAddCharacter(false)}>Cancel</button> : 
+                <button className="btn-confirm" onClick={e => setAddCharacter(true)}>Add a Character?</button>
+            }
             <h2>My Characters: </h2>
             {displayCharacters}
           </div>
+
           <div className="post-list">
+            {addPost ? <AddPostForm setAddPost={setAddPost} updateAllPosts={updateAllPosts} /> : null}
+            {
+              addPost ? 
+                <button className="btn-cancel" onClick={e => setAddPost(false)}>Cancel</button> : 
+                <button className="btn-confirm" onClick={e => setAddPost(true)}>Add a Post?</button>
+            }
             <h2>My Posts: </h2>
             {displayPosts}
           </div>
         </div>
        
-      </div>
+      </>
     }
-    </div>
+    </>
   )
 }
 

@@ -2,11 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddPostForm from "./AddPostForm";
 import Search from "./Search";
+import AddCharacterForm from "./AddCharacterForm";
+import { useSelector } from "react-redux";
 
 function HomePage({ allPosts, updateAllPosts, allTags }) {
   const [addPost, setAddPost] = useState(false);
   const [doSearch, setDoSearch] = useState(false);
   const [searchTag, setSearchTag] = useState("");
+  const characters = useSelector(state => state.characters);
+  const [addCharacter, setAddCharacter] = useState(false);
 
   let posts = allPosts.map(post => {
     if (searchTag === "") {
@@ -48,27 +52,51 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
     <>
       <h2>Available Posts</h2>
       {doSearch ? <Search setDoSearch={setDoSearch} allPosts={allPosts} allTags={allTags} setSearchTag={setSearchTag} /> : null}
-      {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} /> : null}
-      {addPost ? 
-        <button 
-          className="btn-cancel place-self-center" 
-          onClick={
-            e => setAddPost(false)
-          }>Cancel
-        </button> : 
-        <button 
-          className="btn-confirm place-self-center" 
-          onClick={
-            e => setAddPost(true)
-          }>Create a Post?
-        </button>}
+
+        {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} /> : null}
+        
+        {addPost ? null : 
+          <button 
+            className="btn-confirm place-self-center" 
+            onClick={
+              e => {
+                setAddPost(true)
+                setAddCharacter(false)
+              }
+            }>Create a Post?</button>}
+
+        {addCharacter ? 
+          <>
+            <AddCharacterForm setAddCharacter={setAddCharacter} /> 
+            <button 
+              className="btn-cancel place-self-center" 
+              onClick={
+                e => setAddCharacter(false)
+              }>Cancel</button>
+          </>
+          : null}
+
+        {addPost && characters.length === 0 ? 
+          <button 
+            className="btn-confirm place-self-center" 
+            onClick={
+              e => {
+                setAddCharacter(true);
+                setAddPost(false);
+              }
+            }>Add a Character?</button> :
+          null}
+
+        {addPost && characters.length > 0 ?
+          <button className="btn-cancel place-self-center" onClick={e => setAddPost(false)} >Cancel</button> : null}
+
         {
         doSearch ? 
           <button className="btn-cancel place-self-center" onClick={e => {
             setDoSearch(false)
             setSearchTag("")
           }}>Cancel</button> : 
-          <button className="btn-confirm place-self-center" onClick={e => setDoSearch(true)}>Search by Tag?</button>
+          <button className="btn-confirm place-self-center" onClick={e => setDoSearch(true)}>Search by Category?</button>
         }
       <div className="post-list">
         {displayPosts}

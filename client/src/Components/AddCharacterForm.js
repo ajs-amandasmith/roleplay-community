@@ -33,8 +33,9 @@ function AddCharacterForm({ setAddCharacter}) {
   }
 
   return (
-    <div className="div-welcome w-1/2">
+    <div className="div-welcome">
       <form onSubmit={handleSubmit}>
+        <h2 className="text-white mb-4">Add a New Character</h2>
         <label htmlFor="name">Name: </label>
         <input 
           className="border"
