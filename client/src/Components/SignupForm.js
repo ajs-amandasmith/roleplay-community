@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-function SignupForm() {
+function SignupForm({ setSignedUp }) {
   // set form's state
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [signedUp, setSignedUp] = useState(false);
+  const signedUp = useSelector(state => state.signedUp.signedUp)
+
+  console.log('s-u-f', signedUp)
+  
   const dispatch = useDispatch();
 
   // submit form function
@@ -31,8 +34,8 @@ function SignupForm() {
       setIsLoading(false);
       if(r.ok) {
         r.json().then(user => {
-          setSignedUp(true)
           dispatch({ type: "user/get/loaded", payload: user})
+          dispatch({type: "signed-up"})
         })
       } else {
         r.json().then(err => setErrors(err.errors))
@@ -41,7 +44,7 @@ function SignupForm() {
   }
 
   if (signedUp) {
-    return <Redirect to="/" />
+    return <Redirect to="/profile" />
   }
 
   // displayed form

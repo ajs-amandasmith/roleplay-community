@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import AddAvatarForm from "./AddAvatarForm";
 import { Link } from "react-router-dom";
 import blank_avatar from '../images/blank_avatar.png';
@@ -10,6 +10,11 @@ function ProfilePage() {
   const characters = useSelector(state => state.characters);
   const posts = useSelector(state => state.posts);
   const [addAvatar, setAddAvatar] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "done"})
+  }, [])
 
   const displayCharacters = characters.map(character => (
     <div key={character.id} className="post-list-item">

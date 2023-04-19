@@ -15,6 +15,7 @@ function App() {
   const [allPosts, setAllPosts] = useState([]);
   const [allTags, setAllTags] = useState([]);
   const dispatch = useDispatch();
+  const [signedUp, setSignedUp] = useState(false);
 
   useEffect(() => {
     dispatch(fetchUser());
@@ -90,7 +91,7 @@ function App() {
                   <LoginPage />
               </Route>
               <Route path="/signup">
-                <SignupPage />
+                <SignupPage signedUp={signedUp} setSignedUp={setSignedUp} />
               </Route>
             </Switch>
           </div>
