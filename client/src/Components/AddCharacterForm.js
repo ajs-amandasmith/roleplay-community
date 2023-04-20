@@ -7,30 +7,36 @@ function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
   const [about, setAbout] = useState('');
   const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
+  const [noName, setNoName] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
-    fetch("/characters", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: name,
-        about: about
-      })
-    }).then(r => {
-      if (r.ok) {
-        r.json().then(character => {
-          dispatch(addCharacter(character))
-          setAddCharacter(false);
-          setCharacterCreated(true);
+    setNoName(false);
+    if (name === "") {
+      setNoName(true);
+    } else {
+      fetch("/characters", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          about: about
         })
-      } else {
-        r.json().then(err => setErrors(err.errors))
-      }
-    })
+      }).then(r => {
+        if (r.ok) {
+          r.json().then(character => {
+            dispatch(addCharacter(character))
+            setAddCharacter(false);
+            setCharacterCreated(true);
+          })
+        } else {
+          r.json().then(err => setErrors(err.errors))
+        }
+      })
+    }
   }
 
   return (
@@ -56,6 +62,7 @@ function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
         <br></br>
         <button type="submit" className="btn-confirm">Submit</button>
       </form>
+      {noName ? <p className="text-rose-500">Name can't be blank</p> : null}
       {errors.map(err => (
           <p key={err} className="text-rose-400">{err}</p>
         ))}
