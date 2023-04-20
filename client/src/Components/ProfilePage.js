@@ -16,6 +16,7 @@ function ProfilePage({ updateAllPosts }) {
   const [addCharacter, setAddCharacter] = useState(false);
   const [addPost, setAddPost] = useState(false);
   const [characterCreated, setCharacterCreated] = useState(false);
+  const [postCreated, setPostCreated] = useState(false);
 
   useEffect(() => {
     dispatch({ type: "done"})
@@ -83,7 +84,7 @@ function ProfilePage({ updateAllPosts }) {
           </div>
 
           <div className="post-list">
-            {addPost ? <AddPostForm setAddPost={setAddPost} updateAllPosts={updateAllPosts} /> : null}
+            {addPost ? <AddPostForm setAddPost={setAddPost} updateAllPosts={updateAllPosts} setPostCreated={setPostCreated} /> : null}
             {
               addPost ? 
                 <button className="btn-cancel" onClick={e => setAddPost(false)}>Cancel</button> : 
