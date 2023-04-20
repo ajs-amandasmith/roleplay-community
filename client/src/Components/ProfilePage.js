@@ -15,6 +15,7 @@ function ProfilePage({ updateAllPosts }) {
   const dispatch = useDispatch();
   const [addCharacter, setAddCharacter] = useState(false);
   const [addPost, setAddPost] = useState(false);
+  const [characterCreated, setCharacterCreated] = useState(false);
 
   useEffect(() => {
     dispatch({ type: "done"})
@@ -61,7 +62,8 @@ function ProfilePage({ updateAllPosts }) {
       <>
         <h1>Welcome, {user.username}!</h1>
         <h2 className="mt-1 text-4xl">You can update your profile settings here!</h2>
-        <img className="h=[100px] w-[100px] object-cover place-self-center" src={typeof user.avatar === "string" ? user.avatar : blank_avatar} alt='user profile' />
+        {characters.length === 0 ? <h2 className="text-rose-500">Please create a character!</h2> : null}
+        <img className="h=[100px] w-[100px] object-cover place-self-center mt-4" src={typeof user.avatar === "string" ? user.avatar : blank_avatar} alt='user profile' />
         {addAvatar ? 
           <button className="btn-cancel place-self-center" onClick={handleAddAvatar}>Cancel</button> :
           <button className="btn-confirm place-self-center" onClick={handleAddAvatar}>{user.avatar ? "Update Avatar?" : "Add Avatar?"}</button>
@@ -70,7 +72,7 @@ function ProfilePage({ updateAllPosts }) {
         <div className="grid grid-cols-2">
           
           <div className="post-list">
-            {addCharacter ? <AddCharacterForm setAddCharacter={setAddCharacter} /> : null }
+            {addCharacter ? <AddCharacterForm setAddCharacter={setAddCharacter} setCharacterCreated={setCharacterCreated} /> : null }
             {
               addCharacter ? 
                 <button className="btn-cancel" onClick={e => setAddCharacter(false)}>Cancel</button> : 
