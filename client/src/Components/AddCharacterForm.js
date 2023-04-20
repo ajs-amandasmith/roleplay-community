@@ -43,19 +43,21 @@ function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
     <div className="div-welcome">
       <form onSubmit={handleSubmit}>
         <h2 className="text-white mb-4">Add a New Character</h2>
-        <label htmlFor="name">Name: </label>
+        {/* <label htmlFor="name">Name: </label> */}
         <input 
-          className="border"
+          className="ml-2"
           type="text"
           id="name"
           value={name}
+          placeholder="Name"
           onChange={e => setName(e.target.value)}
         />
         <br></br>
-        <label htmlFor="about">About: </label>
+        {/* <label htmlFor="about">About: </label> */}
         <textarea
-          className="border"
+          className="ml-2"
           id="about"
+          placeholder="About Character"
           value={about}
           onChange={e => setAbout(e.target.value)}
         />

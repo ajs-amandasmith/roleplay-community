@@ -45,18 +45,19 @@ function LoginForm() {
   return (
     <>
       <form onSubmit={handleSubmit} className="form-login">
-        <label htmlFor="login-username">Username:</label>
+        {/* <label htmlFor="login-username">Username:</label> */}
         <input
           type="text"
+          className="ml-2"
           placeholder="Username"
           id="login-username"
           value={username}
            onChange={e => setUsername(e.target.value)}
         />
          <br></br>
-        <label htmlFor="login-password">Password:</label>
+        {/* <label htmlFor="login-password">Password:</label> */}
         <input
-          className="m-2"
+          className="ml-2"
           type="password"
           placeholder="Password"
           id="login-password"

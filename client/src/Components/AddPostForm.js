@@ -54,33 +54,35 @@ function AddPostForm({ updateAllPosts, setAddPost, setPostCreated, allTags }) {
     <>
     {characters.length === 0 ? <h2 className="text-rose-500">Please create a character</h2>:
       <div className="div-welcome">
-        <h2 className="text-white mb-4">Create a Post</h2>
+        <h2 className="text-white mb-4 ">Create a Post</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Title: </label>
+          {/* <label htmlFor="title">Title: </label> */}
           <input 
             type="text"
+            className="ml-2"
             placeholder="Title"
             id="title"
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
           <br></br>
-          <label htmlFor="characters">Select a Character: </label>
+          {/* <label htmlFor="characters">Select a Character: </label> */}
           <select 
             id="characters" 
             name="characters" 
-            className="my-2"
+            className="ml-2"
             onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))} 
             defaultValue="Select Your Character"
           >
             <option disabled="disabled">Select Your Character</option>
             {characterOptions}
           </select>
-          <label htmlFor="post-tag">Select Tag: </label>
+          <br></br>
+          {/* <label htmlFor="post-tag">Select Tag: </label> */}
           <select 
           id="post-tag" 
           name="post-tag" 
-          className="capitalize"
+          className="capitalize ml-2"
           onChange={e => {
             setCurrentTagId(parseInt((e.target[e.target.selectedIndex].id))) 
           }} 
@@ -89,9 +91,10 @@ function AddPostForm({ updateAllPosts, setAddPost, setPostCreated, allTags }) {
           {displayTags}
           </select> 
           <br></br>
-          <label htmlFor="post">Post: </label>
+          {/* <label htmlFor="post">Post: </label> */}
           <textarea
             id="post"
+            className="ml-2"
             placeholder="Post..."
             value={post}
             onChange={e => setPost(e.target.value)}

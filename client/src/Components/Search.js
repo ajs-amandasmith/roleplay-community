@@ -12,18 +12,17 @@ function Search({ setDoSearch, allPosts, allTags, setSearchTag, setSearchTagId }
   return (
     <div className="div-welcome">
       <form>
-      <label htmlFor="post-tag">Select Tag: </label>
+      <label htmlFor="post-tag">Select Category: </label>
         <select 
           id="post-tag" 
           name="post-tag" 
           className="capitalize"
           onChange={e => {
-            // setSearchTagId(parseInt((e.target[e.target.selectedIndex].id))) 
+            setSearchTagId(parseInt((e.target[e.target.selectedIndex].id))) 
             setSearchTag(e.target.value)
           }} 
-          defaultValue="Select a Tag"
-        >
-          <option disabled="disabled">Select a Tag</option>
+          defaultValue="Select a Category">
+          <option disabled="disabled">Select a Category</option>
           {displayTags}
         </select>  
       </form>

@@ -49,18 +49,19 @@ function SignupForm({ setSignedUp }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username:</label>
+        {/* <label htmlFor="username">Username:</label> */}
         <input
           type="text"
           id="username"
           placeholder="Username"
           value={username}
           onChange={e => setUsername(e.target.value)}
+          className="ml-2 mb-4"
         />
         <br></br>
-        <label htmlFor="password">Password:</label>
+        {/* <label htmlFor="password">Password:</label> */}
         <input
-          className="m-2"
+          className="ml-2"
           type="password"
           placeholder="Password"
           id="password"
@@ -68,9 +69,9 @@ function SignupForm({ setSignedUp }) {
           onChange={e => setPassword(e.target.value)}
         />
         <br></br>
-        <label htmlFor="password-confirmation">Confirm Password:</label>
+        {/* <label htmlFor="password-confirmation">Confirm Password:</label> */}
         <input
-          className="border"
+          className="ml-2 mb-4"
           placeholder="Confirm Password"
           type="password"
           id={passwordConfirm}
