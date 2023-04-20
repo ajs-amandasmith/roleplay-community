@@ -16,7 +16,6 @@ function CharacterPage() {
       <p className="post-list-user">User: {character.user.username}</p>
       <img className="h=[100px] w-[100px] object-cover ml-2" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
       <p className="post-post">About: {character.about}</p>
-      <AddCharacterAvatarForm character={character} />
     </div>
   ))
 
