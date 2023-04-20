@@ -5,12 +5,12 @@ import { addCharacter } from "../reducer/characters.js"
 function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
   const [name, setName] = useState('');
   const [about, setAbout] = useState('');
-  // const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
   const dispatch = useDispatch();
 
   function handleSubmit(e) {
     e.preventDefault();
-    // setErrors([]);
+    setErrors([]);
     fetch("/characters", {
       method: "POST",
       headers: {
@@ -28,7 +28,7 @@ function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
           setCharacterCreated(true);
         })
       } else {
-        r.json().then(err => console.log(err.errors))
+        r.json().then(err => setErrors(err.errors))
       }
     })
   }
@@ -56,6 +56,9 @@ function AddCharacterForm({ setAddCharacter, setCharacterCreated }) {
         <br></br>
         <button type="submit" className="btn-confirm">Submit</button>
       </form>
+      {errors.map(err => (
+          <p key={err} className="text-rose-400">{err}</p>
+        ))}
     </div>
   )
 }
