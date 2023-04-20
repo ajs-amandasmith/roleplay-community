@@ -53,8 +53,12 @@ function AddCommentForm({ currentPost, updateComments, setAddComment }) {
         />
         <br></br>
         <label htmlFor="characters">Select a Character: </label>
-        <select id="characters" name="characters" onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))}>
-          <option value="" disabled selected>Select Your Character</option>
+        <select 
+          id="characters" 
+          name="characters" 
+          onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))}
+          defaultValue="Select Your Character">
+          <option value="" disabled="disabled">Select Your Character</option>
           {characterOptions}
         </select>
         <br></br>
