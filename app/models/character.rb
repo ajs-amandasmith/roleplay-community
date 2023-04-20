@@ -7,6 +7,7 @@ class Character < ApplicationRecord
   has_many :comments, :dependent => :destroy
 
   validates :name, presence: true
+  validates_uniqueness_of :name, scope: :user_id
 
   validate :acceptable_image
 
