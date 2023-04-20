@@ -25,9 +25,10 @@ export default function allCharactersReducer(state = initialState, action) {
       return action.payload;
 
     case "characters/all/get/loading":
-      return []
+      return state;
 
     case "characters/add":
+      console.log(state)
       return [
         ...state, action.payload
       ]
