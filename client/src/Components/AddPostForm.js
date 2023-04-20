@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function AddPostForm({ updateAllPosts, setAddPost, setPostCreated }) {
+function AddPostForm({ updateAllPosts, setAddPost, setPostCreated, allTags }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [post, setPost] = useState("");
@@ -9,26 +9,36 @@ function AddPostForm({ updateAllPosts, setAddPost, setPostCreated }) {
   const [errors, setErrors] = useState([]);
   const user = useSelector(state => state.user.user);
   const characters = useSelector(state => state.characters);
+  const [currentTagId, setCurrentTagId] = useState("");
 
   const characterOptions = characters.map(character => (
     <option key={character.id} id={character.id}>{character.name}</option>
   ))
 
+  const displayTags = allTags.map(tag => (
+    <option key={tag.id} id={tag.id}>{tag.tag.replace(/-/g, ' ')}</option>
+  ))
+
   function handleSubmit(e) {
     e.preventDefault();
     setErrors([]);
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('post', post);
-    formData.append('character_id', characterId);
-    formData.append('user_id', user.id);
     fetch("/posts", {
       method: "POST",
-      body: formData
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: title,
+        post: post,
+        character_id: characterId,
+        user_id: user.id,
+        tag_ids: [currentTagId]
+      })
     })
       .then(r => {
         if (r.ok) {
           r.json().then(post => {
+            console.log("post", post)
             setAddPost(false);
             dispatch({ type: "posts/add", payload: post })
             updateAllPosts(post, "add");
@@ -66,6 +76,18 @@ function AddPostForm({ updateAllPosts, setAddPost, setPostCreated }) {
             <option disabled="disabled">Select Your Character</option>
             {characterOptions}
           </select>
+          <label htmlFor="post-tag">Select Tag: </label>
+          <select 
+          id="post-tag" 
+          name="post-tag" 
+          className="capitalize"
+          onChange={e => {
+            setCurrentTagId(parseInt((e.target[e.target.selectedIndex].id))) 
+          }} 
+          defaultValue="Select a Tag">
+          <option disabled="disabled">Select a Tag</option>
+          {displayTags}
+          </select> 
           <br></br>
           <label htmlFor="post">Post: </label>
           <textarea

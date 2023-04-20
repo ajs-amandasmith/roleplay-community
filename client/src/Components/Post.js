@@ -21,6 +21,8 @@ function Post({ updateAllPosts, allTags }) {
   const [editPost, setEditPost] = useState(false);
   const [addComment, setAddComment] = useState(false);
 
+  console.log(currentPost)
+
   useEffect(() => {
     // setErrors([]);
     fetch(`/posts/${id}`)

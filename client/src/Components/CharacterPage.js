@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import AddCharacterForm from "./AddCharacterForm";
 import { useSelector } from "react-redux";
 import blank_avatar from '../images/blank_avatar.png';
-import AddCharacterAvatarForm from "./AddCharacterAvatarForm";
 
 function CharacterPage() {
   const status = useSelector(state => state.status)

@@ -55,7 +55,7 @@ function HomePage({ allPosts, updateAllPosts, allTags }) {
       <h2>Available Posts</h2>
       {doSearch ? <Search setDoSearch={setDoSearch} allPosts={allPosts} allTags={allTags} setSearchTag={setSearchTag} /> : null}
 
-        {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} setPostCreated={setPostCreated} /> : null}
+        {addPost ? <AddPostForm updateAllPosts={updateAllPosts} setAddPost={setAddPost} setPostCreated={setPostCreated} allTags={allTags} /> : null}
         
         {addPost ? null : 
           <button 

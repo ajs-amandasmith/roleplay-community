@@ -55,6 +55,8 @@ function ProfilePage({ updateAllPosts }) {
 
   function handleAddAvatar() {
     setAddAvatar(!addAvatar)
+    characterCreated(false);
+    postCreated(false);
   }
 
   return (
