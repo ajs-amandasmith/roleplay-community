@@ -25,8 +25,8 @@ function ProfilePage({ updateAllPosts }) {
 
   const displayCharacters = characters.map(character => (
     <div key={character.id} className="post-list-item">
-      <img className="h=[100px] w-[100px] object-cover" alt="character" src={typeof character.avatar === "string" ? character.avatar : blank_avatar}/>
       <Link to={`/characters/${character.id}`}>
+        <img className="h=[100px] w-[100px] object-cover" alt="character" src={typeof character.avatar === "string" ? character.avatar : blank_avatar}/>
         <p className="post-list-character">{character.name}</p>
       </Link>
     </div>

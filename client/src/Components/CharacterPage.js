@@ -12,10 +12,12 @@ function CharacterPage() {
 
   const displayCharacters = allCharacters.map(character => (
     <div key={character.id} className="post-list-item">
-      <Link to={`/characters/${character.id}`}><h3 className="ml-2">{character.name}</h3></Link>
-      <p className="post-list-user">User: {character.user.username}</p>
-      <img className="h=[100px] w-[100px] object-cover ml-2" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
-      <p className="post-post">About: {character.about}</p>
+      <Link to={`/characters/${character.id}`}>
+        <h3 className="ml-2">{character.name}</h3>
+        <p className="post-list-user">User: {character.user.username}</p>
+        <img className="h=[100px] w-[100px] object-cover ml-2" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
+        <p className="post-post">About: {character.about}</p>
+      </Link>
     </div>
   ))
 
