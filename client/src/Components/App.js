@@ -110,7 +110,7 @@ function App() {
                 <Post updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} allTags={allTags} />
               </Route>
               <Route path="/profile">
-                  <ProfilePage updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} />
+                  <ProfilePage updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} allTags={allTags} />
               </Route>
               <Route path="/characters/:id">
                 <Character updateAllPosts={updateAllPosts} updateAllCharacters={updateAllCharacters} />

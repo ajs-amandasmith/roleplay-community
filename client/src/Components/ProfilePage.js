@@ -6,7 +6,7 @@ import blank_avatar from '../images/blank_avatar.png';
 import AddCharacterForm from "./AddCharacterForm";
 import AddPostForm from "./AddPostForm";
 
-function ProfilePage({ updateAllPosts }) {
+function ProfilePage({ updateAllPosts, allTags }) {
   const user = useSelector(state => state.user.user);
   const status = useSelector(state => state.user.status);
   const characters = useSelector(state => state.characters);
@@ -86,7 +86,7 @@ function ProfilePage({ updateAllPosts }) {
           </div>
 
           <div className="post-list">
-            {addPost ? <AddPostForm setAddPost={setAddPost} updateAllPosts={updateAllPosts} setPostCreated={setPostCreated} /> : null}
+            {addPost ? <AddPostForm setAddPost={setAddPost} updateAllPosts={updateAllPosts} setPostCreated={setPostCreated} allTags={allTags} /> : null}
             {
               addPost ? 
                 <button className="btn-cancel" onClick={e => setAddPost(false)}>Cancel</button> : 
