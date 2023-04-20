@@ -41,33 +41,38 @@ function AddCommentForm({ currentPost, updateComments, setAddComment }) {
   }
 
   return (
-    <div className="div-welcome w-1/2">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="comment">Comment: </label>
-        <input 
-          type="text"
-          placeholder="Comment"
-          id="comment"
-          value={comment}
-          onChange={e => setComment(e.target.value)}
-        />
-        <br></br>
-        <label htmlFor="characters">Select a Character: </label>
-        <select 
-          id="characters" 
-          name="characters" 
-          onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))}
-          defaultValue="Select Your Character">
-          <option value="" disabled="disabled">Select Your Character</option>
-          {characterOptions}
-        </select>
-        <br></br>
-        <button type="submit" className="btn-confirm">Submit</button>
-      </form>
-      {errors.map(err => (
-          <p key={err} className="text-red-600">{err}</p>
-        ))}
-    </div>
+    <>
+      {characters.length === 0 ? <h2 className="text-rose-500">Please create a character</h2> :
+      <div className="div-welcome w-1/2">
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="comment">Comment: </label>
+          <input 
+            type="text"
+            name="comment"
+            placeholder="Comment"
+            id="comment"
+            value={comment}
+            onChange={e => setComment(e.target.value)}
+          />
+          <br></br>
+          <label htmlFor="characters">Select a Character: </label>
+          <select 
+            id="characters" 
+            name="characters" 
+            onChange={e => setCharacterId(parseInt(e.target[e.target.selectedIndex].id))}
+            defaultValue="Select Your Character">
+            <option disabled="disabled">Select Your Character</option>
+            {characterOptions}
+          </select>
+          <br></br>
+          <button type="submit" className="btn-confirm">Submit</button>
+        </form>
+        {errors.map(err => (
+            <p key={err} className="text-red-600">{err}</p>
+          ))}
+      </div>
+      }
+    </>
   )
 }
 
