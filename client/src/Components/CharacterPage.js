@@ -14,8 +14,8 @@ function CharacterPage() {
       <Link to={`/characters/${character.id}`}>
         <h3 className="ml-2">{character.name}</h3>
         <p className="post-list-user">User: {character.user.username}</p>
-        <img className="h=[100px] w-[100px] object-cover ml-2" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
-        <p className="post-post">About: {character.about}</p>
+        <img className="h=[100px] w-[100px] object-cover ml-2 mb-4" src={typeof character.avatar == "string" ? character.avatar : blank_avatar} alt='character-avatar' />
+        {character.about ? <p className="post-post">About: {character.about}</p> : null}
       </Link>
     </div>
   ))
